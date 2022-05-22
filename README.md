@@ -1,7 +1,3 @@
-## 📄 READ THIS
-
-**NEED USE WITH PREFIX? HERE: >> [NanoSpace](https://github.com/Adivise/NanoSpace)**
-
 ## 📑 Short Feature
 - [x] Music System
 - [x] Playlists System
