@@ -125,7 +125,7 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 
 ## 🔩 Features & Commands
 
-> Note: The default prefix is '#'
+> Note: The default prefix is '/' (Slash Commands)
 
 🎶 **Music Commands!** 
 
