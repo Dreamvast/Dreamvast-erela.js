@@ -179,24 +179,6 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Daycore (/filter daycore)
 - Television (/filter Television)
 	
-📦 **Playlist Commands!**
-- Create (/playlist create [name])
-- Add (/playlist add [name] [link])
-- Private (/playlist private [name])
-- Public (/playlist public [name])
-- Delete (/playlist delete [name])
-- Import (/playlist import [name])
-- Detail (/playlist detail [name])
-- Remove (/playlist remove [name] [position])
-- Savequeu (/playlist savequeue [name])
-- View (/playlist view)
-	
-💎 **Premium Commands!**
-- Premium (/premium premium [plan] [user id])
-- Generate (/premium generate [plan] [amount]) // (OWNER ONLY)
-- Redeem (/premium redeem [code])
-- Setup (/premium setup type [create/delete])
-	
 📑 **Utilities Commands!**
 - Restart (/utilitie restart) // (OWNER ONLY)
 - Language (/utilitie language input: [language] ) // Example: en, th
