@@ -1254,7 +1254,7 @@ module.exports = {
                 },
               )
               .setColor(client.color)
-              .setFooter(`Type: /radio <1-34>`, client.user.displayAvatarURL())
+              .setFooter({text:`Type: /radio <1-34>`})
               .setTimestamp();
 
             if (!value){
