@@ -90,7 +90,7 @@ module.exports = {
                 const invite = new MessageEmbed()
                     .setTitle(`**Thanks for Inviting ${client.user.username}**`)
                     .setDescription(`**${client.user.username} Powered by Adivise/XeonDex**`)
-                    .addField('Nanospace:', `https://adivise.github.io/Stylish/`)
+                    .addField('Nanospace:', `https://github.com/Adivise/NanoSpacePlus`)
                     .addField(`${client.user.username}`, `https://top.gg/bot/958642964018642944`)
                     .setTimestamp()
                     .setColor(client.color);
