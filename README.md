@@ -1,7 +1,3 @@
-## 📄 READ THIS
-
-**NEED USE WITH PREFIX? HERE: >> [NanoSpace](https://github.com/Adivise/NanoSpace)**
-
 ## 📑 Short Feature
 - [x] Music System
 - [x] Playlists System
@@ -129,7 +125,7 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 
 ## 🔩 Features & Commands
 
-> Note: The default prefix is '#'
+> Note: The default prefix is '/' (Slash Commands)
 
 🎶 **Music Commands!** 
 
@@ -182,24 +178,6 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Vibrato (/filter vibrato)
 - Daycore (/filter daycore)
 - Television (/filter Television)
-	
-📦 **Playlist Commands!**
-- Create (/playlist create [name])
-- Add (/playlist add [name] [link])
-- Private (/playlist private [name])
-- Public (/playlist public [name])
-- Delete (/playlist delete [name])
-- Import (/playlist import [name])
-- Detail (/playlist detail [name])
-- Remove (/playlist remove [name] [position])
-- Savequeu (/playlist savequeue [name])
-- View (/playlist view)
-	
-💎 **Premium Commands!**
-- Premium (/premium premium [plan] [user id])
-- Generate (/premium generate [plan] [amount]) // (OWNER ONLY)
-- Redeem (/premium redeem [code])
-- Setup (/premium setup type [create/delete])
 	
 📑 **Utilities Commands!**
 - Restart (/utilitie restart) // (OWNER ONLY)
