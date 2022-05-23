@@ -1,5 +1,5 @@
-const { white, red } = require('chalk');
+const logger = require("../../settings/logger");
 
 module.exports = async (client) => {
-    console.log(white('[') + red('WARN') + white('] ') + red('Errored ') + white(`${client.user.tag} (${client.user.id})`) + red(' '));
+    logger.error(`Errored ${client.user.tag} (${client.user.id})`);
 };

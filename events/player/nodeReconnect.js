@@ -1,5 +1,4 @@
-const { yellow, white } = require("chalk");
-
+const logger = require("../../settings/logger");
 module.exports = async (client, node, error) => {
-	console.log(white('[') + yellow('WARN') + white('] ') + yellow('Node ') + white(node.options.identifier) + yellow(' Reconnected!'));
+	logger.info(`Node ${node.options.identifier} Reconnected!`);
 }

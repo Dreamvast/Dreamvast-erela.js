@@ -1,5 +1,5 @@
-const { white, red } = require('chalk');
+const logger = require("../../settings/logger");
 
 module.exports = async (client, info) => {
-    console.log(white(' [') + red('ERROR') + white('] ') + red('Rate Limited, Sleeping for ') + white(0) + red(' seconds'));
+    logger.error(`Rate Limited, Sleeping for ${0} seconds`);
 }

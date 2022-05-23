@@ -1,5 +1,5 @@
-const { white, green } = require("chalk");
 const { readdirSync } = require('fs');
+const logger = require("../settings/logger");
 
 module.exports = async (client) => {
     readdirSync("./commands/").map(async dir => {
@@ -11,5 +11,5 @@ module.exports = async (client) => {
             }
         });
     })
-    console.log(white('[') + green('INFO') + white('] ') + green('SlashCommand ') + white('Events') + green(' Loaded!'));
+    logger.info('SlashCommand Events Loaded!');
 }

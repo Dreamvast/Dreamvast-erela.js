@@ -1,5 +1,5 @@
-const { yellow, white } = require("chalk");
+const logger = require("../../settings/logger");
 
 module.exports = async (client, error, id) => {
-    console.log(white('[') + yellow('WARN') + white('] ') + yellow('Shard ') + white(id) + yellow(' Shard Disconnected!'));
+    logger.info(`Shard ${id} Shard Disconnected!`);
 }

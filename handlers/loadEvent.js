@@ -1,5 +1,5 @@
-const { white, green } = require("chalk");
 const { readdirSync } = require('fs');
+const logger = require("../settings/logger");
 
 module.exports = async (client) => {
     const loadcommand = dirs =>{
@@ -11,5 +11,5 @@ module.exports = async (client) => {
         }
     };
     ["client", "guild"].forEach((x) => loadcommand(x));
-    console.log(white('[') + green('INFO') + white('] ') + green('Event ') + white('Events') + green(' Loaded!'));
+    logger.info('Event Events Loaded!');
 };

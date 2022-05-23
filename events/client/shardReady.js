@@ -1,5 +1,5 @@
-const { white, green } = require("chalk");
+const logger = require("../../settings/logger");
 
 module.exports = async (client, id) => {
-    console.log(white('[') + green('INFO') + white('] ') + green('Shard ') + white(id) + green(' Shard Ready!'));
+    logger.info(`Shard ${id} Ready!`);
 }

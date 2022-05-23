@@ -1,8 +1,8 @@
 const { Client, Intents, Collection } = require("discord.js");
 const { Manager } = require("erela.js");
-const Spotify = require("better-erela.js-spotify").default;
-const Deezer = require("erela.js-deezer");
-const AppleMusic = require("better-erela.js-apple").default;
+const Spotify = require("erela.js-spotify")
+const Deezer = require("./settings/Deezer");
+const AppleMusic = require("erela.js-apple")
 const Facebook = require("erela.js-facebook");
 const { I18n } = require("locale-parser")
 
@@ -26,6 +26,8 @@ class MainClient extends Client {
     this.color = this.config.EMBED_COLOR;
     this.i18n = new I18n(this.config.LANGUAGE);
     if(!this.token) this.token = this.config.TOKEN;
+    const clientID = this.config.SPOTIFY_ID
+    const clientSecret = this.config.SPOTIFY_SECRET
 
     process.on('unhandledRejection', error => console.log(error));
     process.on('uncaughtException', error => console.log(error));
@@ -36,7 +38,10 @@ class MainClient extends Client {
       nodes: this.config.NODES,
       autoPlay: true,
       plugins: [
-        new Spotify(),
+        new Spotify({
+          clientID,
+          clientSecret
+        }),
         new Facebook(),
         new Deezer(),
         new AppleMusic()

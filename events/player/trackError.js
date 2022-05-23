@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js");
-const { white, red } = require("chalk");
 const GLang = require("../../settings/models/Language.js");
+const logger = require("../../settings/logger");
 
 module.exports = async (client, player, track, payload) => {
 
@@ -33,7 +33,7 @@ module.exports = async (client, player, track, payload) => {
 
     channel.send({ embeds: [embed] });
 
-    console.log(white('[') + red('DEBUG') + white('] ') + red('Track Error in ') + white(player.guild) + red(' Auto-Leaved!'));
+    logger.error(`Track Error in [${player.guild}] (GUILD ID). Auto-Leaved!`);
     if (!player.voiceChannel) player.destroy();
 
 }

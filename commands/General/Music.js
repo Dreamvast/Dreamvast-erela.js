@@ -8,15 +8,70 @@ const ytsr = require("youtube-sr").default;
 
 const fastForwardNum = 10;
 const rewindNum = 10;
+// Radio link with embed
+const Radiostations = [
+  "Standard-Radio https://streams.ilovemusic.de/iloveradio14.mp3",
+  "Base-Radio.de https://baseradiode.stream.laut.fm/baseradiode",
+  "Chill-Radio https://streams.ilovemusic.de/iloveradio17.mp3",
+  "Dance-Radio https://streams.ilovemusic.de/iloveradio2.mp3",
+  "Deutsch-Rap-Radio https://streams.ilovemusic.de/iloveradio6.mp3",
+  "Greatest-hits-Radio https://streams.ilovemusic.de/iloveradio16.mp3",
+  "Hip-hop-Radio https://streams.ilovemusic.de/iloveradio3.mp3",
+  "Party-Radio https://streams.ilovemusic.de/iloveradio14.mp3",
+  "Us-Rap-Radio https://streams.ilovemusic.de/iloveradio13.mp3",
+  "X-Mas-Radio https://streams.ilovemusic.de/iloveradio8.mp3",
+  "Greatest-hits-Radio https://stream-mz.planetradio.co.uk/net2national.mp3", //britten
+  "Absolut-Radio http://icy-e-bab-02-gos.sharp-stream.com/absoluteradio.mp3",//britten
+  "Absolut-70s-Radio http://ais.absoluteradio.co.uk/absolute70s.mp3",//britten
+  "Absolut-80s-Radio http://ais.absoluteradio.co.uk/absolute80s.mp3",//britten
+  "Absolut-90s-Radio http://ais.absoluteradio.co.uk/absolute90s.mp3",//britten
+  "Absolut-2000s-Radio http://ais.absoluteradio.co.uk/absolute00s.mp3",//britten
+  "Absolut-Classic-Rock http://icy-e-bab-04-cr.sharp-stream.com/absoluteclassicrock.mp3",//britten
 
+  "Top-Radio http://loadbalancing.topradio.be/topradio.mp3", //australia
+
+  "88.6-Radio http://radio886.fluidstream.eu/886_live.mp3", //austria
+  "Kronehit-Radio http://onair.krone.at/kronehit.mp3", //austria
+
+  "NRJ-Radio http://cdn.nrjaudio.fm/audio1/fr/30001/mp3_128.mp3",//france
+  "Radio-France-Radio http://direct.fipradio.fr/live/fip-midfi.mp3",//france
+
+  "Rai-Radio http://icestreaming.rai.it:80/1.mp3",//italy
+  "Veronica-Radio http://icestreaming.rai.it:80/2.mp3",//italy
+
+  "ERR-Radio http://icecast.err.ee:80/vikerraadio.mp3",//Estonia
+  "Tallin-Radio http://icecast.err.ee:80/raadiotallinn.mp3",//Estonia
+
+  "Color-Music-Radio http://icecast8.play.cz/color128.mp3",//Spain
+  "Helax-93.7-Radio http://ice.abradio.cz:8000/helax128.mp3",//Spain
+
+  "Český-rozhlas-Radio http://icecast6.play.cz/cro2-128.mp3",//Czech
+  "Spin-Radio http://icecast4.play.cz/spin128.mp3",//Czech
+
+  "BB-Radio http://icecast.omroep.nl/radio1-bb-mp3",//netherlands
+  "538-Radio http://21223.live.streamtheworld.com/RADIO538.mp3",//netherlands
+
+  "radio90-cieszyn http://streams2.radio90.pl:8000/radio90_128kbps_stereo.mp3",//Polska
+  "Fama-Radio http://stream2.nadaje.com:8076/,stream.mp3"//Polska
+]
+
+// Main code
 module.exports = { 
     name: "music",
     description: "Music Command!",
     options: [
         {
-            name: "247",
-            description: "24/7 in voice channel",
-            type: 1
+            name: "radio",
+            description: "Play radio in voice channel",
+            type: 1,
+            options:[
+                {
+                    name: "radio_number",
+                    description: "The number of radio to choose the radio station",
+                    type: 4,
+                    required: false
+                }
+            ]
         },
         {
             name: "autoplay",
@@ -1106,6 +1161,154 @@ module.exports = {
                 .setColor(client.color);
             
             msg.edit({ content: " ", embeds: [changevol] });
+        }
+        if (interaction.options.getSubcommand() === "radio"){
+            const msg = await interaction.editReply(`${client.i18n.get(language, "music", "radio_loading")}`);
+            const value = interaction.options.getInteger("radio_number");
+            const { channel } = interaction.member.voice;
+            if (!channel) return msg.edit(`${client.i18n.get(language, "music", "search_invoice")}`);
+            if (!channel.permissionsFor(interaction.guild.me).has(Permissions.FLAGS.CONNECT)) return msg.edit(`${client.i18n.get(language, "music", "radio_join")}`);
+            if (!channel.permissionsFor(interaction.guild.me).has(Permissions.FLAGS.SPEAK)) return msg.edit(`${client.i18n.get(language, "music", "radio_speak")}`);
+
+            const resultsEmbed = new MessageEmbed()
+              .setTitle(`${client.i18n.get(language, "radio", "available_radio")}`)//
+              .addFields(
+                {
+                  name: `${client.i18n.get(language, "radio", "standard_radio")}`, value: `**1:  ** [\`${Radiostations[1 - 1].split(" ")[0]}\`](${Radiostations[1 - 1].split(" ")[1]})
+                **2:  ** [\`${Radiostations[2 - 1].split(" ")[0]}\`](${Radiostations[2 - 1].split(" ")[1]})
+                **3:  ** [\`${Radiostations[3 - 1].split(" ")[0]}\`](${Radiostations[3 - 1].split(" ")[1]})
+                **4:  ** [\`${Radiostations[4 - 1].split(" ")[0]}\`](${Radiostations[4 - 1].split(" ")[1]})
+                **5:  ** [\`${Radiostations[5 - 1].split(" ")[0]}\`](${Radiostations[5 - 1].split(" ")[1]})
+                ` , inline: true
+                }, {
+                  name: `${client.i18n.get(language, "radio", "standard_radio")}`, value: `**6:  ** [\`${Radiostations[6 - 1].split(" ")[0]}\`](${Radiostations[6 - 1].split(" ")[1]})
+                **7:  ** [\`${Radiostations[7 - 1].split(" ")[0]}\`](${Radiostations[7 - 1].split(" ")[1]})
+                **8:  ** [\`${Radiostations[8 - 1].split(" ")[0]}\`](${Radiostations[8 - 1].split(" ")[1]})
+                **9:  ** [\`${Radiostations[9 - 1].split(" ")[0]}\`](${Radiostations[9 - 1].split(" ")[1]})
+                **10: ** [\`${Radiostations[10 - 1].split(" ")[0]}\`](${Radiostations[10 - 1].split(" ")[1]})
+                ` , inline: true
+                },
+                { name: `\u200b`, value: `\u200b`, inline: true },
+
+                {
+                  name: `***🇬🇧 British RADIO:***`, value: `**11: ** [\`${Radiostations[11 - 1].split(" ")[0]}\`](${Radiostations[11 - 1].split(" ")[1]})
+        **12: ** [\`${Radiostations[12 - 1].split(" ")[0]}\`](${Radiostations[12 - 1].split(" ")[1]})
+        ` , inline: true
+                },
+                {
+                  name: `***🇬🇧 British RADIO:***`, value: `
+        **13: ** [\`${Radiostations[13 - 1].split(" ")[0]}\`](${Radiostations[13 - 1].split(" ")[1]})
+        **14: ** [\`${Radiostations[14 - 1].split(" ")[0]}\`](${Radiostations[14 - 1].split(" ")[1]})
+        ` , inline: true
+                },
+                {
+                  name: `***🇬🇧 British RADIO:***`, value: `
+        **15: ** [\`${Radiostations[15 - 1].split(" ")[0]}\`](${Radiostations[15 - 1].split(" ")[1]})
+        **16: ** [\`${Radiostations[16 - 1].split(" ")[0]}\`](${Radiostations[16 - 1].split(" ")[1]})
+        ` , inline: true
+                },
+
+                {
+                  name: `***🇦🇺 AUSTRALIA RADIO:***`, value: `**17: ** [\`${Radiostations[17 - 1].split(" ")[0]}\`](${Radiostations[17 - 1].split(" ")[1]})
+        **18: ** [\`${Radiostations[18 - 1].split(" ")[0]}\`](${Radiostations[18 - 1].split(" ")[1]})`, inline: true
+                },
+
+                {
+                  name: `***🇦🇹 AUSTRIA RADIO:***`, value: `**19: ** [\`${Radiostations[19 - 1].split(" ")[0]}\`](${Radiostations[19 - 1].split(" ")[1]})
+        **20: ** [\`${Radiostations[20 - 1].split(" ")[0]}\`](${Radiostations[20 - 1].split(" ")[1]})`, inline: true
+                },
+
+                {
+                  name: `***🇫🇷 France RADIO:***`, value: ` **21: ** [\`${Radiostations[21 - 1].split(" ")[0]}\`](${Radiostations[21 - 1].split(" ")[1]})
+        **22: ** [\`${Radiostations[22 - 1].split(" ")[0]}\`](${Radiostations[22 - 1].split(" ")[1]})`, inline: true
+                },
+
+                {
+                  name: `***🇮🇹 Italy RADIO:***`, value: `**23: ** [\`${Radiostations[23 - 1].split(" ")[0]}\`](${Radiostations[23 - 1].split(" ")[1]})
+        **24: ** [\`${Radiostations[24 - 1].split(" ")[0]}\`](${Radiostations[24 - 1].split(" ")[1]})`, inline: true
+                },
+
+                {
+                  name: `***🇪🇪 Estonia RADIO:***`, value: `**25: ** [\`${Radiostations[25 - 1].split(" ")[0]}\`](${Radiostations[25 - 1].split(" ")[1]})
+        **26: ** [\`${Radiostations[26 - 1].split(" ")[0]}\`](${Radiostations[26 - 1].split(" ")[1]})`, inline: true
+                },
+
+                {
+                  name: `***🇪🇸 Spain RADIO:***`, value: `**27: ** [\`${Radiostations[27 - 1].split(" ")[0]}\`](${Radiostations[27 - 1].split(" ")[1]})
+        **28: ** [\`${Radiostations[28 - 1].split(" ")[0]}\`](${Radiostations[28 - 1].split(" ")[1]})`, inline: true
+                },
+
+                {
+                  name: `***🇨🇿 Czech RADIO:***`, value: `**29: ** [\`${Radiostations[29 - 1].split(" ")[0]}\`](${Radiostations[29 - 1].split(" ")[1]})
+        **30: ** [\`${Radiostations[30 - 1].split(" ")[0]}\`](${Radiostations[30 - 1].split(" ")[1]})`, inline: true
+                },
+
+                {
+                  name: `***🇳🇱 Netherlands RADIO:***`, value: `**31: ** [\`${Radiostations[31 - 1].split(" ")[0]}\`](${Radiostations[31 - 1].split(" ")[1]})
+        **32: ** [\`${Radiostations[32 - 1].split(" ")[0]}\`](${Radiostations[32 - 1].split(" ")[1]})`, inline: true
+                },
+
+                {
+                  name: `***🇵🇱 Polska RADIO:***`, value: `**33: ** [\`${Radiostations[33 - 1].split(" ")[0]}\`](${Radiostations[33 - 1].split(" ")[1]})
+        **34: ** [\`${Radiostations[34 - 1].split(" ")[0]}\`](${Radiostations[34 - 1].split(" ")[1]})`, inline: true
+                },
+              )
+              .setColor(client.color)
+              .setFooter(`Type: /radio <1-34>`, client.user.displayAvatarURL())
+              .setTimestamp();
+
+            if (!value){
+                return msg.edit({ content: " ", embeds: [resultsEmbed] })
+            }
+
+            if (Number(value) > 34 || Number(value) < 0) { 
+                    return msg.edit(`${client.i18n.get(language, "music", "radio_invalid", {
+                        prefix: "/"
+                    })}`);
+                }
+
+            const player = await client.manager.create({
+                guild: interaction.guild.id,
+                voiceChannel: interaction.member.voice.channel.id,
+                textChannel: interaction.channel.id,
+                selfDeafen: true,
+            });
+
+            let i;
+
+            for (i = 1; i <= 1 + Radiostations.length; i++) {
+              if (Number(value) === Number(i)) {
+                break;
+              }
+            }
+
+            const args2 = Radiostations[i - 1].split(` `);
+
+            const song = args2[1]
+            const state = player.state;
+            if (state != "CONNECTED") await player.connect();
+
+            const res = await client.manager.search(song, interaction.user);
+
+            switch (res.loadType) {
+                case "TRACK_LOADED":
+                player.queue.add(res.tracks[0]);
+                    const embed = new MessageEmbed()
+                        .setDescription(`${client.i18n.get(language, "music", "play_track", {
+                            title: args2[0],
+                            url: res.tracks[0].uri,
+                            duration: convertTime(res.tracks[0].duration, true),
+                            request: res.tracks[0].requester
+                        })}`)
+                        .setColor(client.color)
+                    msg.edit({ content: " ", embeds: [embed] });
+                    if(!player.playing) player.play();
+                break;
+                case "NO_MATCHES":
+                msg.edit(`${client.i18n.get(language, "music", "radio_match")}`);
+                player.destroy();
+            }
+            player.twentyFourSeven = true;
         }
     }
 };

@@ -1,5 +1,4 @@
-const { white, green }= require("chalk");
-
+const logger = require("../../settings/logger");
 module.exports = async (client, player) => {
-	console.log(white('[') + green('DEBUG') + white('] ') + green('Player Created from (') + white(`${player.guild}`) + green(')'));
+	logger.info(`Player Created from [${player.guild}] (GUILD ID)`);
 }

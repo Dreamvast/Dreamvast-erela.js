@@ -1,23 +1,31 @@
-const { green, white } = require('chalk');
+const logger = require("../../settings/logger");
+const figlet = require('figlet');
+const chalk = require('chalk');
+const dreamvast = chalk.hex('#008dde');
 
 module.exports = async (client) => {
     await client.manager.init(client.user.id);
 
-    console.log(white('[') + green('INFO') + white('] ') + green(`${client.user.tag} (${client.user.id})`) + white(` is Ready!`));
+    figlet(client.user.tag, function(err, data) {
+        if (err) {
+            console.log('Something went wrong...');
+            console.dir(err);
+            return;
+        }
+        console.log(dreamvast(data));
+    });
 
 
     let guilds = client.guilds.cache.size;
     let members = client.guilds.cache.reduce((a, b) => a + b.memberCount, 0);
     let channels = client.channels.cache.size;
 
-    const activities = [
-        `/premium setup | ${guilds} servers`,
-        `/music play <input> | ${members} users`,
-        `/filter doubletime | ${channels} channels`,
+        const activities = [
+        `/music radio + number| ${guilds} servers!`,
+        `/music play + url | ${members} users!`,
     ]
 
     setInterval(() => {
-        client.user.setActivity(`${activities[Math.floor(Math.random() * activities.length)]}`, { type: 'WATCHING' });
-    }, 15000)
-
+        client.user.setActivity(`${activities[Math.floor(Math.random() * activities.length)]}`, { type: "STREAMING", url: "https://www.twitch.tv/lofichillnight" });
+    }, 60000)
 };

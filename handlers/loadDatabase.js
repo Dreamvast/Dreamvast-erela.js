@@ -1,6 +1,6 @@
-const { white, green } = require("chalk");
+const logger = require("../settings/logger");
 
 module.exports = (client) => {
     require("./Database/loadDatabase.js")(client);
-    console.log(white('[') + green('INFO') + white('] ') + green('Database ') + white('Events') + green(' Loaded!'));
+    logger.info('Database Events Loaded!');
 };

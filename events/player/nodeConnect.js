@@ -1,5 +1,5 @@
-const { white, green } = require("chalk");
+const logger = require("../../settings/logger");
 
 module.exports = async (client, node) => {
-	console.log(white('[') + green('INFO') + white('] ') + green('Node ') + white(node.options.identifier) + green(' Connected!'));
+	logger.info(`Node ${node.options.identifier} Connected!`);
 }
