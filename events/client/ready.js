@@ -20,9 +20,10 @@ module.exports = async (client) => {
     let members = client.guilds.cache.reduce((a, b) => a + b.memberCount, 0);
     let channels = client.channels.cache.size;
 
-        const activities = [
-        `/music radio + number| ${guilds} servers!`,
-        `/music play + url | ${members} users!`,
+    const activities = [
+        `with ${guilds} servers! | /music radio`,
+        `with ${members} users! | /music play`,
+        `with ${channels} users! | /filter nightcore`
     ]
 
     setInterval(() => {

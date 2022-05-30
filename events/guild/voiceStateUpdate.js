@@ -1,5 +1,5 @@
 const delay = require("delay");
-const { Permissions } = require("discord.js");
+const { Permissions, MessageEmbed } = require("discord.js");
 
 module.exports = async (client, oldState, newState) => {
 	const player = client.manager?.players.get(newState.guild.id);
@@ -12,6 +12,9 @@ module.exports = async (client, oldState, newState) => {
 			newState.guild.me.voice.setSuppressed(false);
 		}
 	}
+	const vcRoom = oldState.guild.me.voice.channel.id;
+
+    const leaveEmbed = client.channels.cache.get(player.textChannel);
 
 	if (oldState.id === client.user.id) return;
 	if (!oldState.guild.members.cache.get(client.user.id).voice.channelId) return;
@@ -28,6 +31,13 @@ module.exports = async (client, oldState, newState) => {
 				const newPlayer = client.manager?.players.get(newState.guild.id)
 				newPlayer ? player.destroy() : oldState.guild.me.voice.channel.leave();
 				client.UpdateMusic(newPlayer);
+				const TimeoutEmbed = new MessageEmbed(client, newState.guild)
+            		.setDescription(`**Disconnected from <#${vcRoom}> because I was left alone ;(**`);
+            	try {
+		            if (leaveEmbed) leaveEmbed.send({ embeds: [TimeoutEmbed] });
+		        } catch (error) {
+		            console.log(error);
+		        }
 			}
 		}
 	}
