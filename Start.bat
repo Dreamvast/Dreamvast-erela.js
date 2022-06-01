@@ -1,6 +1,6 @@
 @echo off
 
-title Dreamvast [GOLBAL]
+title Dreamvast [GLOBAL]
 
 :StartBot
 
