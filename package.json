@@ -10,8 +10,8 @@
     "chalk": "^4.1.0",
     "common-tags": "^1.8.0",
     "delay": "^4.4.0",
-    "discord-api-types": "^0.26.0",
-    "discord.js": "^13.6.0",
+    "discord-api-types": "^0.33.5",
+    "discord.js": "^13.8.0",
     "dotenv": "^12.0.3",
     "erela.js": "^2.3.3",
     "erela.js-apple": "^1.2.6",
@@ -28,8 +28,7 @@
     "plsargs": "^0.1.6",
     "pretty-ms": "^7.0.1",
     "voucher-code-generator": "^1.1.1",
-    "winston": "^3.7.2",
-    "youtube-sr": "^4.1.9"
+    "winston": "^3.7.2"
   },
   "scripts": {
     "start": "node --no-warnings index.js"
@@ -38,12 +37,12 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Adivise/NanoSpacePlus.git"
+    "url": "git+https://github.com/Dreamvast/Dreamvast-slash.git"
   },
   "bugs": {
-    "url": "https://github.com/Adivise/NanoSpacePlus/issues"
+    "url": "https://github.com/Dreamvast/Dreamvast-slash/issues"
   },
-  "homepage": "https://github.com/Adivise/NanoSpacePlus#readme",
+  "homepage": "https://github.com/Dreamvast/Dreamvast-slash#readme",
   "devDependencies": {
     "node": "^17.0.1"
   }

@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const GLang = require('../../settings/models/Language.js'); 
+const GControl = require('../../settings/models/Control.js')
 
 module.exports = { 
     name: "utilitie",
@@ -22,6 +23,19 @@ module.exports = {
             name: "restart",
             description: "Shuts down the client!",
             type: 1 /// SUBCOMMMAND! = 1
+        },
+        {
+            name: "control",
+            description: "Enable or disable the player control",
+            type: 1,
+            options: [
+                {
+                    name: "toggle",
+                    description: "Choose enable or disable",
+                    required: true,
+                    type: 3
+                }
+            ]
         }
     ],
 run: async (interaction, client, user, language) => {
@@ -82,6 +96,49 @@ run: async (interaction, client, user, language) => {
             await interaction.editReply({ embeds: [restart] });
                     
             process.exit();
+        }
+
+        if (interaction.options.getSubcommand() === "control"){
+            const toggle = interaction.options.getString("toggle");
+
+            if (!interaction.member.permissions.has('MANAGE_GUILD')) return interaction.editReply(`${client.i18n.get(language, "utilities", "control_perm")}`);
+            if(toggle !== 'enable' && toggle !== 'disable') return message.channel.send(`${client.i18n.get(language, "utilities", "control_invaild")}`);
+            const guildControl = await GControl.findOne({ guild: interaction.guild.id });
+            if(!guildControl) {
+                const guildControl = new GControl({
+                    guild: interaction.guild.id,
+                    playerControl: toggle
+                });
+                guildControl.save().then(() => {
+                    const embed = new MessageEmbed()
+                    .setDescription(`${client.i18n.get(language, "utilities", "control_set", {
+                        toggle: toggle
+                    })}`)
+                    .setColor(client.color)
+
+                    interaction.editReply({ embeds: [embed] });
+                }
+                ).catch((err) => {
+                    interaction.editReply(`${client.i18n.get(language, "utilities", "control_err")}`)
+                    console.log(err)
+                });
+            }
+            else if(guildControl) {
+                guildControl.playerControl = toggle;
+                guildControl.save().then(() => {
+                    const embed = new MessageEmbed()
+                    .setDescription(`${client.i18n.get(language, "utilities", "control_change", {
+                        toggle: toggle
+                    })}`)
+                    .setColor(client.color)
+        
+                    interaction.editReply({ embeds: [embed] });
+                }
+                ).catch((err) => {
+                    interaction.editReply(`${client.i18n.get(language, "utilities", "control_err")}`);
+                    console.log(err)
+                });
+            }
         }
     }
 };

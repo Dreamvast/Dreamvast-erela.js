@@ -8,3 +8,10 @@ lang_error: "Something went wrong please try again later."
 
 ##### Restart command #####
 restart_msg: "`🤖` | *Client has been:* `Shutting down`"
+
+##### PLayer control command #####
+control_perm: "You need the `MANAGE_GUILD` permission to use this command."
+control_invalid: "**The mode can't be another word! Only enable or disable**"
+control_set: "`🔧` | *Player control mode has been set to:* `%{toggle}`"
+control_change: "`🔧` | *Player control mode has been change to:* `%{toggle}`"
+control_err: "An error occured while setting the player control mode!"
