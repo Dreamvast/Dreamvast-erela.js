@@ -1,5 +1,5 @@
 const { white, green } = require("chalk");
-const logger = require("../settings/logger");
+const logger = require("../plugins/logger");
 
 module.exports = (client) => {
     require("./Player/loadPlayer.js")(client);

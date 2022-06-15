@@ -1,7 +1,7 @@
 const { Client, Intents, Collection } = require("discord.js");
 const { Manager } = require("erela.js");
 const Spotify = require("erela.js-spotify")
-const Deezer = require("./settings/Deezer");
+const Deezer = require("./plugins/Deezer");
 const AppleMusic = require("erela.js-apple")
 const Facebook = require("erela.js-facebook");
 const { I18n } = require("locale-parser")
@@ -20,7 +20,7 @@ class MainClient extends Client {
                 Intents.FLAGS.GUILD_MESSAGES,
             ]
         });
-    this.config = require("./settings/config.js");
+    this.config = require("./plugins/config.js");
     this.owner = this.config.OWNER_ID;
     this.dev = this.config.DEV_ID;
     this.color = this.config.EMBED_COLOR;

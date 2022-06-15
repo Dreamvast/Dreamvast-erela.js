@@ -1,6 +1,6 @@
 const { MessageEmbed, Client } = require("discord.js");
-const Setup = require("../../settings/models/Setup.js");
-const GLang = require("../../settings/models/Language.js");
+const Setup = require("../../plugins/models/Setup.js");
+const GLang = require("../../plugins/models/Language.js");
 const delay = require("delay");
 
 /**

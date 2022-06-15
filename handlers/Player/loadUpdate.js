@@ -1,8 +1,8 @@
 const { Client, MessageEmbed } = require("discord.js");
 const formatDuration = require("../../structures/FormatDuration.js");
 const { Player } = require("erela.js");
-const GLang = require("../../settings/models/Language.js");
-const Setup = require("../../settings/models/Setup.js");
+const GLang = require("../../plugins/models/Language.js");
+const Setup = require("../../plugins/models/Setup.js");
   
   /**
    *

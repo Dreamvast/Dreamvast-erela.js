@@ -1,5 +1,5 @@
 const { readdirSync } = require('fs');
-const logger = require("../settings/logger");
+const logger = require("../plugins/logger");
 
 module.exports = async (client) => {
     readdirSync("./commands/").map(async dir => {

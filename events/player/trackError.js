@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js");
-const GLang = require("../../settings/models/Language.js");
-const logger = require("../../settings/logger");
+const GLang = require("../../plugins/models/Language.js");
+const logger = require("../../plugins/logger");
 
 module.exports = async (client, player, track, payload) => {
 

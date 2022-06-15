@@ -1,4 +1,4 @@
-const logger = require("../../settings/logger");
+const logger = require("../../plugins/logger");
 
 module.exports = async (client) => {
     logger.info(`Disconnected ${client.user.tag} (${client.user.id})`);

@@ -1,4 +1,4 @@
-const logger = require("../../settings/logger");
+const logger = require("../../plugins/logger");
 const figlet = require('figlet');
 const chalk = require('chalk');
 const dreamvast = chalk.hex('#008dde');

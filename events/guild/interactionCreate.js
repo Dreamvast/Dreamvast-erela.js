@@ -1,7 +1,7 @@
 const { Permissions } = require("discord.js");
-const GLang = require("../../settings/models/Language.js");
+const GLang = require("../../plugins/models/Language.js");
 const chalk = require('chalk');
-const logger = require("../../settings/logger");
+const logger = require("../../plugins/logger");
 
 module.exports = async(client, interaction) => {
     if (interaction.isCommand() || interaction.isContextMenu()) {

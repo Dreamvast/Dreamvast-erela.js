@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js');
-const GLang = require('../../settings/models/Language.js'); 
-const GControl = require('../../settings/models/Control.js')
+const GLang = require('../../plugins/models/Language.js'); 
+const GControl = require('../../plugins/models/Control.js')
 
 module.exports = { 
     name: "utilitie",

@@ -2,12 +2,12 @@ const { MessageEmbed, Permissions, MessageActionRow, MessageButton } = require('
 const formatDuration = require('../../structures/FormatDuration.js');
 const { convertTime } = require("../../structures/ConvertTime.js");
 const { SlashPage } = require('../../structures/PageQueue.js');
-const Setup = require("../../settings/models/Setup.js");
+const Setup = require("../../plugins/models/Setup.js");
 const lyricsfinder = require('lyrics-finder');
 
 const fastForwardNum = 10;
 const rewindNum = 10;
-const { Radiostations } = require("../../settings/radioLink.js")
+const { Radiostations } = require("../../plugins/radioLink.js")
 
 // Main code
 module.exports = { 

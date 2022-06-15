@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { MONGO_URI } = require('../../settings/config.js');
+const { MONGO_URI } = require('../../plugins/config.js');
 
 module.exports = async () => {
     try {
