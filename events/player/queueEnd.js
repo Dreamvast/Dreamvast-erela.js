@@ -1,5 +1,5 @@
 const { MessageEmbed, Client } = require("discord.js");
-const GLang = require("../../plugins/models/Language.js");
+const GConfig = require("../../plugins/guildConfig.js")
 const { Player } = require("erela.js");
 
 /**
@@ -15,14 +15,17 @@ module.exports = async (client, player) => {
 
 	if (player.twentyFourSeven) return;
 
-	let guildModel = await GLang.findOne({
+	let guildModel = await GConfig.findOne({
 	  guild: channel.guild.id,
 	});
-	if (!guildModel) {
-	  guildModel = await GLang.create({
-		guild: channel.guild.id,
-		language: "en",
-	  });
+	if (!guildModel) { guildModel = await GConfig.create({
+			guild: channel.guild.id,
+			enable: false,
+			channel: "",
+			playmsg: "",
+			language: "en",
+			playerControl: "disable",
+		});
 	}
 
 	const { language } = guildModel;

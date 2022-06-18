@@ -1,5 +1,5 @@
 const { Permissions } = require("discord.js");
-const GLang = require("../../plugins/models/Language.js");
+const GConfig = require("../../plugins/guildConfig.js")
 const chalk = require('chalk');
 const logger = require("../../plugins/logger");
 
@@ -10,7 +10,7 @@ module.exports = async(client, interaction) => {
 
         let LANGUAGE = client.i18n;
 
-		let guildModel = await GLang.findOne({ guild: interaction.guild.id });
+		let guildModel = await GConfig.findOne({ guild: interaction.guild.id });
         if(guildModel && guildModel.language) LANGUAGE = guildModel.language;
 
         const language = LANGUAGE;

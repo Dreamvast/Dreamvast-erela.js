@@ -1,6 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-const GLang = require('../../plugins/models/Language.js'); 
-const GControl = require('../../plugins/models/Control.js')
+const GConfig = require("../../plugins/guildConfig.js")
 
 module.exports = { 
     name: "utilitie",
@@ -50,11 +49,15 @@ run: async (interaction, client, user, language) => {
                 languages: languages.join(', ')
             })}`);
     
-            const newLang = await GLang.findOne({ guild: interaction.guild.id });
+            const newLang = await GConfig.findOne({ guild: interaction.guild.id });
             if(!newLang) {
-                const newLang = new GLang({
+                const newLang = new GConfig({
                     guild: interaction.guild.id,
-                    language: input
+                    enable: false,
+                    channel: "",
+                    playmsg: "",
+                    language: input,
+                    playerControl: "disable",
                 });
                 newLang.save().then(() => {
                     const embed = new MessageEmbed()
@@ -103,10 +106,14 @@ run: async (interaction, client, user, language) => {
 
             if (!interaction.member.permissions.has('MANAGE_GUILD')) return interaction.editReply(`${client.i18n.get(language, "utilities", "control_perm")}`);
             if(toggle !== 'enable' && toggle !== 'disable') return message.channel.send(`${client.i18n.get(language, "utilities", "control_invaild")}`);
-            const guildControl = await GControl.findOne({ guild: interaction.guild.id });
+            const guildControl = await GConfig.findOne({ guild: interaction.guild.id });
             if(!guildControl) {
-                const guildControl = new GControl({
+                const guildControl = new GConfig({
                     guild: interaction.guild.id,
+                    enable: false,
+                    channel: "",
+                    playmsg: "",
+                    language: "en",
                     playerControl: toggle
                 });
                 guildControl.save().then(() => {

@@ -1,8 +1,7 @@
 const { Client, MessageEmbed } = require("discord.js");
 const formatDuration = require("../../structures/FormatDuration.js");
 const { Player } = require("erela.js");
-const GLang = require("../../plugins/models/Language.js");
-const Setup = require("../../plugins/models/Setup.js");
+const GConfig = require("../../plugins/guildConfig.js")
   
   /**
    *
@@ -23,10 +22,14 @@ module.exports = async (client) => {
         let playMsg = await channel.messages.fetch(data.playmsg, { cache: false, force: true });
         if (!playMsg) return;
     
-        let guildModel = await GLang.findOne({ guild: player.guild });
-        if (!guildModel) { guildModel = await GLang.create({
+        let guildModel = await GConfig.findOne({ guild: player.guild });
+        if (!guildModel) { guildModel = await GConfig.create({
                 guild: player.guild,
+                enable: false,
+                channel: "",
+                playmsg: "",
                 language: "en",
+                playerControl: "disable",
             });
         }
 
@@ -75,7 +78,7 @@ module.exports = async (client) => {
      * @param {Player} player
      */
     client.UpdateMusic = async function (player) {
-        let data = await Setup.findOne({ guild: player.guild });
+        let data = await GConfig.findOne({ guild: player.guild });
         if (data.enable === false) return;
 
         let channel = await client.channels.cache.get(player.guild.channel);
@@ -84,10 +87,14 @@ module.exports = async (client) => {
         let playMsg = await channel.messages.fetch(data.playmsg, { cache: true, force: true });
         if (!playMsg) return;
     
-        let guildModel = await GLang.findOne({ guild: player.guild });
-        if (!guildModel) { guildModel = await GLang.create({
+        let guildModel = await GConfig.findOne({ guild: player.guild });
+        if (!guildModel) { guildModel = await GConfig.create({
                 guild: player.guild,
+                enable: false,
+                channel: "",
+                playmsg: "",
                 language: "en",
+                playerControl: "disable",
             });
         }
 

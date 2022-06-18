@@ -1,4 +1,3 @@
- 
 const { ContextMenuInteraction, MessageEmbed } = require('discord.js');
 
 module.exports = { 

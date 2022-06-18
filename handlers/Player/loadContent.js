@@ -1,6 +1,5 @@
 const { MessageEmbed, Client } = require("discord.js");
-const Setup = require("../../plugins/models/Setup.js");
-const GLang = require("../../plugins/models/Language.js");
+const GConfig = require("../../plugins/guildConfig.js")
 const delay = require("delay");
 
 /**
@@ -21,14 +20,18 @@ try {
             const playChannel = client.channels.cache.get(player.textChannel);
             if (!playChannel) return;
         
-            let guildModel = await GLang.findOne({ guild: playChannel.guild.id });
-            if (!guildModel) { guildModel = await GLang.create({
+            let guild_config = await GConfig.findOne({ guild: playChannel.guild.id });
+            if (!guild_config) { guild_config = await GConfig.create({
                     guild: playChannel.guild.id,
+                    enable: false,
+                    channel: "",
+                    playmsg: "",
                     language: "en",
+                    playerControl: "disable",
                 });
             }
 
-            const { language } = guildModel;
+            const { language } = guild_config;
 
             switch (customId) {
                 case "sprevious":
@@ -159,27 +162,21 @@ try {
 
 client.on("messageCreate", async (message) => {
         if (!message.guild || !message.guild.available) return;
-        let database = await Setup.findOne({ guild: message.guildId });
-        if (!database) return Setup.create({
+        let config = await GConfig.findOne({ guild: message.guild.id });
+        if (!config) return GConfig.create({
             guild: message.guildId,
             enable: false,
             channel: "",
             playmsg: "",
+            language: "en",
+            playerControl: "disable",
         });
-        if (database.enable === false) return;
+        if (config.enable === false) return;
 
-        let channel = await message.guild.channels.cache.get(database.channel);
+        let channel = await message.guild.channels.cache.get(config.channel);
         if (!channel) return;
 
-        if (database.channel != message.channel.id) return;
-
-        let guildModel = await GLang.findOne({ guild: message.guild.id });
-        if (!guildModel) {
-            guildModel = await GLang.create({
-                guild: message.guild.id,
-                language: "en",
-            });
-        }
+        if (config.channel != message.channel.id) return;
 
         const { language } = guildModel;
 

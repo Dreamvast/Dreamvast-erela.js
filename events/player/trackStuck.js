@@ -1,18 +1,22 @@
 const { MessageEmbed } = require("discord.js");
-const GLang = require("../../plugins/models/Language.js");
+const GConfig = require("../../plugins/guildConfig.js")
 const logger = require("../../plugins/logger");
 
 module.exports = async (client, player, track, payload) => {
     const channel = client.channels.cache.get(player.textChannel);
     if (!channel) return;
 
-    let guildModel = await GLang.findOne({
+    let guildModel = await GConfig.findOne({
       guild: channel.guild.id,
     });
     if (!guildModel) {
-      guildModel = await GLang.create({
+      guildModel = await GConfig.create({
         guild: channel.guild.id,
+        enable: false,
+        channel: "",
+        playmsg: "",
         language: "en",
+        playerControl: "disable",
       });
     }
 

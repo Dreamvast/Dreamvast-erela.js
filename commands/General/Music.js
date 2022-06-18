@@ -2,7 +2,7 @@ const { MessageEmbed, Permissions, MessageActionRow, MessageButton } = require('
 const formatDuration = require('../../structures/FormatDuration.js');
 const { convertTime } = require("../../structures/ConvertTime.js");
 const { SlashPage } = require('../../structures/PageQueue.js');
-const Setup = require("../../plugins/models/Setup.js");
+const GConfig = require("../../plugins/guildConfig.js")
 const lyricsfinder = require('lyrics-finder');
 
 const fastForwardNum = 10;
@@ -491,7 +491,7 @@ module.exports = {
             msg.edit({ content: ' ', embeds: [lyricsEmbed] });
         }
         if (interaction.options.getSubcommand() === "nowplaying") {
-            let database = await Setup.findOne({ guild: interaction.guild.id });
+            let database = await GConfig.findOne({ guild: interaction.guild.id });
             const realtime = client.config.NP_REALTIME;
             const msg = await interaction.editReply(`${client.i18n.get(language, "music", "np_loading")}`);
             const player = client.manager.get(interaction.guild.id);
