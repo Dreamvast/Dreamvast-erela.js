@@ -4,6 +4,7 @@ const { convertTime } = require("../../structures/ConvertTime.js");
 const { SlashPage } = require('../../structures/PageQueue.js');
 const GConfig = require("../../plugins/guildConfig.js")
 const lyricsfinder = require('lyrics-finder');
+const logger = require('../../plugins/logger')
 
 const fastForwardNum = 10;
 const rewindNum = 10;
@@ -226,7 +227,19 @@ module.exports = {
                     required: false,
                 }
             ],
-        }
+        },
+        {
+            name: "file-play",
+            description: "Play the music file for the bot",
+            type: 1,
+            options: [
+                {
+                    name: "input",
+                    description: "The music file to play",
+                    type: 11,
+                }
+            ]/// SUBCOMMAND! = 1
+        },
     ],
     run: async (interaction, client, user, language) => {
         await interaction.deferReply({ ephemeral: false });
@@ -1260,6 +1273,82 @@ module.exports = {
                 player.destroy();
             }
             player.twentyFourSeven = true;
+        }
+        if (interaction.options.getSubcommand() === "file-play") {
+            // Feature coded by XeonE52680v3 (Github)
+            // Copyright belongs to XeonE52680v3
+            // Please credit me when using this feature
+        
+            const file = await interaction.options.getAttachment("input")
+            const msg = await interaction.editReply(`${client.i18n.get(language, "music", "play_loading")}`);
+            logger.info(`/music file-play used in ${interaction.guild.name} server!`)
+            const { channel } = interaction.member.voice;
+            if (!channel) return msg.edit(`${client.i18n.get(language, "music", "play_invoice")}`);
+            if (!channel.permissionsFor(interaction.guild.me).has(Permissions.FLAGS.CONNECT)) return msg.edit(`${client.i18n.get(language, "music", "play_join")}`);
+            if (!channel.permissionsFor(interaction.guild.me).has(Permissions.FLAGS.SPEAK)) return msg.edit(`${client.i18n.get(language, "music", "play_speak")}`);
+            if (file.contentType !== "audio/mpeg") return msg.edit(`${client.i18n.get(language, "music", "play_invalid_file")}`)
+
+
+            const player = client.manager.create({
+                guild: interaction.guild.id,
+                voiceChannel: interaction.member.voice.channel.id,
+                textChannel: interaction.channel.id,
+                selfDeafen: true,
+            });
+
+            const state = player.state;
+            if (state != "CONNECTED") await player.connect();
+            const res = await client.manager.search(file.attachment, interaction.user);
+            if(res.loadType != "NO_MATCHES") {
+                if(res.loadType == "TRACK_LOADED") {
+                    player.queue.add(res.tracks[0]);
+                    const embed = new MessageEmbed()
+                        .setDescription(`${client.i18n.get(language, "music", "play_track", {
+                            title: file.name,
+                            url: file.url,
+                            duration: convertTime(res.tracks[0].duration, true),
+                            request: res.tracks[0].requester
+                        })}`)
+                        .setColor(client.color)
+                    msg.edit({ content: " ", embeds: [embed] });
+                    if(!player.playing) player.play();
+                }
+                else if(res.loadType == "PLAYLIST_LOADED") {
+                    player.queue.add(res.tracks)
+                    const embed = new MessageEmbed()
+                        .setDescription(`${client.i18n.get(language, "music", "play_playlist", {
+                            title: file.name,
+                            url: file.url,
+                            duration: convertTime(res.playlist.duration),
+                            songs: res.tracks.length,
+                            request: res.tracks[0].requester
+                        })}`)
+                        .setColor(client.color)
+                    msg.edit({ content: " ", embeds: [embed] });
+                    if(!player.playing) player.play();
+                }
+                else if(res.loadType == "SEARCH_RESULT") {
+                    player.queue.add(res.tracks[0]);
+                    const embed = new MessageEmbed()
+                        .setDescription(`${client.i18n.get(language, "music", "play_result", {
+                            title: file.name,
+                            url: file.url,
+                            duration: convertTime(res.tracks[0].duration, true),
+                            request: res.tracks[0].requester
+                        })}`)
+                        .setColor(client.color)
+                    msg.edit({ content: " ", embeds: [embed] });
+                    if(!player.playing) player.play();
+                }
+                else if(res.loadType == "LOAD_FAILED") {
+                    msg.edit(`${client.i18n.get(language, "music", "play_fail")}`); 
+                    player.destroy();
+                }
+            }
+            else {
+                msg.edit(`${client.i18n.get(language, "music", "play_match")}`); 
+                player.destroy();
+            }
         }
     }
 };

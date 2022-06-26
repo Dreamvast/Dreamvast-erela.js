@@ -1,7 +1,7 @@
 {
-  "name": "nanospaceplus",
+  "name": "dreamvast-slash",
   "version": "0.0.1",
-  "description": "✈ Join Discord: https://discord.gg/4pk97A2 👌",
+  "description": "✈ Join Discord: https://discord.gg/xHvsCMjnhU 👌",
   "main": "index.js",
   "dependencies": {
     "@discordjs/rest": "^0.2.0-canary.0",
@@ -10,7 +10,7 @@
     "chalk": "^4.1.0",
     "common-tags": "^1.8.0",
     "delay": "^4.4.0",
-    "discord-api-types": "^0.33.5",
+    "discord-api-types": "^0.35.0",
     "discord.js": "^13.8.0",
     "dotenv": "^12.0.3",
     "erela.js": "^2.3.3",
