@@ -1280,14 +1280,17 @@ module.exports = {
             // Please credit me when using this feature
         
             const file = await interaction.options.getAttachment("input")
+            console.log(file)
             const msg = await interaction.editReply(`${client.i18n.get(language, "music", "play_loading")}`);
             logger.info(`/music file-play used in ${interaction.guild.name} server!`)
             const { channel } = interaction.member.voice;
             if (!channel) return msg.edit(`${client.i18n.get(language, "music", "play_invoice")}`);
             if (!channel.permissionsFor(interaction.guild.me).has(Permissions.FLAGS.CONNECT)) return msg.edit(`${client.i18n.get(language, "music", "play_join")}`);
             if (!channel.permissionsFor(interaction.guild.me).has(Permissions.FLAGS.SPEAK)) return msg.edit(`${client.i18n.get(language, "music", "play_speak")}`);
-            if (file.contentType !== "audio/mpeg") return msg.edit(`${client.i18n.get(language, "music", "play_invalid_file")}`)
-
+            if (file.contentType !== "audio/mpeg" && file.contentType !== "audio/ogg") return msg.edit(`${client.i18n.get(language, "music", "play_invalid_file")}`)
+            if (!file.contentType) {
+                msg.edit(`${client.i18n.get(language, "music", "play_warning_file")}`)
+            }
 
             const player = client.manager.create({
                 guild: interaction.guild.id,
