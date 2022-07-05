@@ -9,6 +9,7 @@
 - [x] SlashCommand
 - [x] ContextMenus
 - [x] Custom Filters
+- [x] Play music from file
 - [x] Easy to use
 
 ## 🎶 Support Source
