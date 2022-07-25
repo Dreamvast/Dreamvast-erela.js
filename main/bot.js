@@ -1,15 +1,18 @@
 const { Client, Intents, Collection } = require("discord.js");
 const { Manager } = require("erela.js");
+const Discord = require('discord.js');
 const Spotify = require("erela.js-spotify")
-const Deezer = require("./plugins/Deezer");
+const Deezer = require("../plugins/Deezer");
 const AppleMusic = require("erela.js-apple")
 const Facebook = require("erela.js-facebook");
 const { I18n } = require("locale-parser")
+const Cluster = require('discord-hybrid-sharding');
 
 class MainClient extends Client {
      constructor() {
         super({
-            shards: "auto",
+          shards: Cluster.data.SHARD_LIST,
+          shardCount: Cluster.data.TOTAL_SHARDS,
             allowedMentions: {
                 parse: ["roles", "users", "everyone"],
                 repliedUser: false
@@ -20,7 +23,7 @@ class MainClient extends Client {
                 Intents.FLAGS.GUILD_MESSAGES,
             ]
         });
-    this.config = require("./plugins/config.js");
+    this.config = require("../plugins/config.js");
     this.owner = this.config.OWNER_ID;
     this.dev = this.config.DEV_ID;
     this.color = this.config.EMBED_COLOR;
@@ -53,11 +56,12 @@ class MainClient extends Client {
     });
 
     ["slash", "premiums"].forEach(x => client[x] = new Collection());
-    ["loadCommand", "loadEvent", "loadDatabase", "loadPlayer" ].forEach(x => require(`./handlers/${x}`)(client));
+    ["loadCommand", "loadEvent", "loadDatabase", "loadPlayer" ].forEach(x => require(`../handlers/${x}`)(client));
 
 	}
 		connect() {
         return super.login(this.token);
     };
 };
+
 module.exports = MainClient;
