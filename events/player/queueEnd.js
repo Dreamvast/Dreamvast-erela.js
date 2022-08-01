@@ -1,4 +1,4 @@
-const { MessageEmbed, Client } = require("discord.js");
+const { EmbedBuilder, Client } = require("discord.js");
 const GConfig = require("../../plugins/guildConfig.js")
 const { Player } = require("erela.js");
 
@@ -36,7 +36,7 @@ module.exports = async (client, player) => {
 
 		/////////// Update Music Setup ///////////
 
-	const embed = new MessageEmbed()
+	const embed = new EmbedBuilder()
 		.setColor(client.color)
 		.setDescription(`${client.i18n.get(language, "player", "queue_end_desc")}`);
 

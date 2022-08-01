@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, } = require("discord.js");
 const formatduration = require('../../structures/FormatDuration.js');
 const GConfig = require("../../plugins/guildConfig.js")
   
@@ -34,7 +34,7 @@ module.exports = async (client, player, track, payload) => {
     }
     const { language } = guildModel;
   
-    const embeded = new MessageEmbed()
+    const embeded = new EmbedBuilder()
       .setAuthor({ name: `${client.i18n.get(language, "player", "track_title")}`, iconURL: `${client.i18n.get(language, "player", "track_icon")}` })
       .setDescription(`**[${track.title}](${track.uri})**`)
       .setColor(client.color)
@@ -50,68 +50,68 @@ module.exports = async (client, player, track, payload) => {
       })}`, `\`\`\`🔴 | 🎶──────────────────────────────\`\`\``)
       .setTimestamp();
     
-    const row = new MessageActionRow()
+    const row = new ActionRowBuilder()
       .addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setCustomId("pause")
           .setEmoji("⏯")
-          .setStyle("SUCCESS")
+          .setStyle("Success")
       )
       .addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setCustomId("replay")
           .setEmoji("⬅")
-          .setStyle("PRIMARY")
+          .setStyle("Primary")
       )
       .addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setCustomId("stop")
           .setEmoji("✖")
-          .setStyle("DANGER")
+          .setStyle("Danger")
       )
       .addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setCustomId("skip")
           .setEmoji("➡")
-          .setStyle("PRIMARY")
+          .setStyle("Primary")
       )
       .addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setCustomId("loop")
           .setEmoji("🔄")
-          .setStyle("SUCCESS")
+          .setStyle("Success")
       )
     
-    const row2 = new MessageActionRow()
+    const row2 = new ActionRowBuilder()
       .addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setCustomId("shuffle")
           .setEmoji("🔀")
-          .setStyle("SUCCESS")
+          .setStyle("Success")
       )
       .addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setCustomId("voldown")
           .setEmoji("🔉")
-          .setStyle("PRIMARY")
+          .setStyle("Primary")
       )
       .addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setCustomId("clear")
           .setEmoji("🗑")
-          .setStyle("DANGER")
+          .setStyle("Danger")
       )
       .addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setCustomId("volup")
           .setEmoji("🔊")
-          .setStyle("PRIMARY")
+          .setStyle("Primary")
       )
       .addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setCustomId("queue")
           .setEmoji("📋")
-          .setStyle("SUCCESS")
+          .setStyle("Success")
       )
     
     const nplaying = await client.channels.cache.get(player.textChannel).send({ embeds: [embeded], components: [row, row2] });
@@ -133,7 +133,7 @@ module.exports = async (client, player, track, payload) => {
         await player.pause(!player.paused);
         const uni = player.paused ? `${client.i18n.get(language, "player", "switch_pause")}` : `${client.i18n.get(language, "player", "switch_resume")}`;
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "player", "pause_msg", {
               pause: uni,
             })}`)
@@ -146,7 +146,7 @@ module.exports = async (client, player, track, payload) => {
         }
         await player.stop();
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "player", "skip_msg")}`)
             .setColor(client.color);
 
@@ -160,7 +160,7 @@ module.exports = async (client, player, track, payload) => {
         await player.stop();
         await player.destroy();
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "player", "stop_msg")}`)
             .setColor(client.color);
         
@@ -172,7 +172,7 @@ module.exports = async (client, player, track, payload) => {
         }
         await player.queue.shuffle();
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "player", "shuffle_msg")}`)
             .setColor(client.color);
 
@@ -184,7 +184,7 @@ module.exports = async (client, player, track, payload) => {
         await player.setTrackRepeat(!player.trackRepeat);
         const uni = player.trackRepeat ? `${client.i18n.get(language, "player", "switch_enable")}` : `${client.i18n.get(language, "player", "switch_disable")}`;
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "player", "repeat_msg", {
               loop: uni,
             })}`)
@@ -197,7 +197,7 @@ module.exports = async (client, player, track, payload) => {
         }
         await player.setVolume(player.volume + 5);
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "player", "volup_msg", {
               volume: player.volume,
             })}`)
@@ -211,7 +211,7 @@ module.exports = async (client, player, track, payload) => {
         }
         await player.setVolume(player.volume - 5);
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "player", "voldown_msg", {
               volume: player.volume,
             })}`)
@@ -225,7 +225,7 @@ module.exports = async (client, player, track, payload) => {
         }
         await player.seek(0);
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "player", "replay_msg")}`)
             .setColor(client.color);
 
@@ -254,7 +254,7 @@ module.exports = async (client, player, track, payload) => {
         for (let i = 0; i < pagesNum; i++) {
           const str = songStrings.slice(i * 10, i * 10 + 10).join('');
     
-          const embed = new MessageEmbed()
+          const embed = new EmbedBuilder()
             .setAuthor({ name: `${client.i18n.get(language, "player", "queue_author", {
               guild: message.guild.name,
             })}`, iconURL: message.guild.iconURL({ dynamic: true }) })
@@ -284,7 +284,7 @@ module.exports = async (client, player, track, payload) => {
         }
         await player.queue.clear();
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "player", "clear_msg")}`)
             .setColor(client.color);
 

@@ -1,4 +1,4 @@
-const { Client, Intents, Collection } = require("discord.js");
+const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const { Manager } = require("erela.js");
 const Discord = require('discord.js');
 const Spotify = require("erela.js-spotify")
@@ -11,16 +11,17 @@ const Cluster = require('discord-hybrid-sharding');
 class MainClient extends Client {
      constructor() {
         super({
-          shards: Cluster.data.SHARD_LIST,
-          shardCount: Cluster.data.TOTAL_SHARDS,
+          // shards: Cluster.data.SHARD_LIST,
+          // shardCount: Cluster.data.TOTAL_SHARDS,
+          shards: 'auto',
             allowedMentions: {
                 parse: ["roles", "users", "everyone"],
                 repliedUser: false
             },
             intents: [
-                Intents.FLAGS.GUILDS,
-                Intents.FLAGS.GUILD_VOICE_STATES,
-                Intents.FLAGS.GUILD_MESSAGES,
+                GatewayIntentBits.Guilds,
+                GatewayIntentBits.GuildVoiceStates,
+                GatewayIntentBits.GuildMessages,
             ]
         });
     this.config = require("../plugins/config.js");

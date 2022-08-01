@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const GControl = require("../../plugins/guildConfig.js")
 const logger = require("../../plugins/logger");
 
@@ -30,7 +30,7 @@ module.exports = async (client, player, track, payload) => {
 
     /////////// Update Music Setup ///////////
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
         .setColor(client.color)
         .setDescription(`${client.i18n.get(language, "player", "error_desc")}`);
 

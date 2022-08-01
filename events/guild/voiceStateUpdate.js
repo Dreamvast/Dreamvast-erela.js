@@ -12,7 +12,7 @@ module.exports = async (client, oldState, newState) => {
 			newState.guild.me.voice.setSuppressed(false);
 		}
 	}
-	const vcRoom = oldState.guild.me.voice.channel.id;
+	const vcRoom = oldState.guild.members.me.voice.channel.id;
 
     const leaveEmbed = client.channels.cache.get(player.textChannel);
 

@@ -1,4 +1,4 @@
-const { ContextMenuInteraction, MessageEmbed } = require('discord.js');
+const { ContextMenuInteraction, EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: "Context | Loop",
@@ -18,7 +18,7 @@ module.exports = {
         if (player.queueRepeat === true) {
             player.setQueueRepeat(false)
             
-            const unloopall = new MessageEmbed()
+            const unloopall = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "music", "unloopall")}`)
                 .setColor(client.color);
 
@@ -27,7 +27,7 @@ module.exports = {
         else {
             player.setQueueRepeat(true);
             
-            const loopall = new MessageEmbed()
+            const loopall = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "music", "loopall")}`)
                 .setColor(client.color);
 

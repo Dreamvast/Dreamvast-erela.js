@@ -1,5 +1,5 @@
 const delay = require('delay');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = { 
     name: "filter",
@@ -190,7 +190,7 @@ module.exports = {
     
                 await player.node.send(data);
     
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "3d"
                 })}`)
@@ -233,7 +233,7 @@ module.exports = {
                 
                 await player.node.send(data);
     
-            const bassed = new MessageEmbed()
+            const bassed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "bass"
                 })}`)
@@ -244,8 +244,6 @@ module.exports = {
         }
         //// BASSBOOST COMMAND
         if (interaction.options.getSubcommand() === "bassboost") {
-            try {
-                if (user && user.isPremium) {
                 const value = interaction.options.getInteger('amount');
     
                 const player = client.manager.get(interaction.guild.id);
@@ -280,7 +278,7 @@ module.exports = {
             const msg1 = await interaction.editReply(`${client.i18n.get(language, "filters", "filter_loading", {
                     name: client.commands.get('bassboost').config.name
                 })}`);
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: client.commands.get('bassboost').config.name
                 })}`)
@@ -316,7 +314,7 @@ module.exports = {
         const msg2 = await interaction.editReply(`${client.i18n.get(language, "filters", "bassboost_loading", {
                     amount: value
                     })}`);
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "filters", "bassboost_set", {
                     amount: value
                     })}`)
@@ -324,19 +322,6 @@ module.exports = {
                 
         await delay(2000);
                 return msg2.edit({ content: " ", embeds: [embed] });
-        } else {
-            const Premiumed = new MessageEmbed()
-                .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
-                .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
-                .setColor(client.color)
-                .setTimestamp()
-    
-            return interaction.editReply({ content: " ", embeds: [Premiumed] });
-          }
-        } catch (err) {
-            console.log(err)
-            interaction.editReply({ content: `${client.i18n.get(language, "nopremium", "premium_error")}` })
-            }
         }
         //// CHINA COMMAND
         if (interaction.options.getSubcommand() === "china") {
@@ -361,7 +346,7 @@ module.exports = {
     
                 await player.node.send(data);
     
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "china"
                 })}`)
@@ -393,7 +378,7 @@ module.exports = {
     
                 await player.node.send(data);
     
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "chipmunk"
                 })}`)
@@ -425,7 +410,7 @@ module.exports = {
         
                 await player.node.send(data);
     
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "darthvader"
                 })}`)
@@ -472,7 +457,7 @@ module.exports = {
         
                 await player.node.send(data);
     
-            const daycored = new MessageEmbed()
+            const daycored = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "daycore"
                 })}`)
@@ -502,7 +487,7 @@ module.exports = {
         
                 await player.node.send(data);
     
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "doubletime"
                 })}`)
@@ -529,7 +514,7 @@ module.exports = {
             }
             await player.node.send(data);
     
-            const earrapped = new MessageEmbed()
+            const earrapped = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "earrape"
                 })}`)
@@ -540,8 +525,6 @@ module.exports = {
         }
         //// EQUALIZER COMMAND
         if (interaction.options.getSubcommand() === "equalizer") {
-            try {
-                if (user && user.isPremium) {
                 const value = interaction.options.getString('bands');
 
                 const player = client.manager.get(interaction.guild.id);
@@ -550,7 +533,7 @@ module.exports = {
                 if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_voice")}`);
     
             if (!value) {
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setAuthor({ name: `${client.i18n.get(language, "filters", "eq_author")}`, iconURL: `${client.i18n.get(language, "filters", "eq_icon")}` })
                     .setColor(client.color)
                     .setDescription(`${client.i18n.get(language, "filters", "eq_desc")}`)
@@ -598,7 +581,7 @@ module.exports = {
             const msg = await interaction.editReply(`${client.i18n.get(language, "filters", "eq_loading", {
                 bands: bandsStr
                 })}`);
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "eq_on", {
                     bands: bandsStr
                     })}`)
@@ -606,19 +589,6 @@ module.exports = {
     
             await delay(2000);
             return msg.edit({ content: " ", embeds: [embed] });
-        } else {
-            const Premiumed = new MessageEmbed()
-                .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
-                .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
-                .setColor(client.color)
-                .setTimestamp()
-    
-            return interaction.editReply({ content: " ", embeds: [Premiumed] });
-          }
-        } catch (err) {
-            console.log(err)
-            interaction.editReply({ content: `${client.i18n.get(language, "nopremium", "premium_error")}` })
-            }
         }
         //// NIGHTCORE COMMAND
         if (interaction.options.getSubcommand() === "nightcore") {
@@ -643,7 +613,7 @@ module.exports = {
         
                 await player.node.send(data);
     
-            const nightcored = new MessageEmbed()
+            const nightcored = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "nightcore"
                 })}`)
@@ -676,7 +646,7 @@ module.exports = {
             const msg = await interaction.editReply(`${client.i18n.get(language, "filters", "pitch_loading", {
                 amount: value
             })}`);
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "pitch_on", {
                     amount: value
                 })}`)
@@ -718,7 +688,7 @@ module.exports = {
         
                 await player.node.send(data);
     
-            const popped = new MessageEmbed()
+            const popped = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "pop"
                 })}`)
@@ -751,7 +721,7 @@ module.exports = {
             const msg = await interaction.editReply(`${client.i18n.get(language, "filters", "rate_loading", {
                 amount: value
                 })}`);
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "rate_on", {
                     amount: value
                 })}`)
@@ -776,7 +746,7 @@ module.exports = {
             await player.node.send(data);
             await player.setVolume(100);
             
-            const resetted = new MessageEmbed()
+            const resetted = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "reset_on")}`)
                 .setColor(client.color);
     
@@ -806,7 +776,7 @@ module.exports = {
     
                 await player.node.send(data);
     
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "slowmotion"
                 })}`)
@@ -849,7 +819,7 @@ module.exports = {
     
                 await player.node.send(data);
     
-            const softed = new MessageEmbed()
+            const softed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "soft"
                 })}`)
@@ -882,7 +852,7 @@ module.exports = {
             const msg = await interaction.editReply(`${client.i18n.get(language, "filters", "speed_loading", {
                 amount: value
                 })}`);
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "speed_on", {
                     amount: value
                 })}`)
@@ -924,7 +894,7 @@ module.exports = {
     
                 await player.node.send(data);
     
-            const sbed = new MessageEmbed()
+            const sbed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "superbass"
                 })}`)
@@ -967,7 +937,7 @@ module.exports = {
     
                 await player.node.send(data);
     
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "television"
                 })}`)
@@ -1010,7 +980,7 @@ module.exports = {
     
                 await player.node.send(data);
     
-            const tbed = new MessageEmbed()
+            const tbed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "treblebass"
                 })}`)
@@ -1041,7 +1011,7 @@ module.exports = {
     
                 await player.node.send(data);
     
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "trembolo"
                 })}`)
@@ -1087,7 +1057,7 @@ module.exports = {
     
                 await player.node.send(data);
     
-            const vaporwaved = new MessageEmbed()
+            const vaporwaved = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "vaporwave"
                 })}`)
@@ -1122,7 +1092,7 @@ module.exports = {
     
                 await player.node.send(data);
     
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "vibrate"
                 })}`)
@@ -1153,7 +1123,7 @@ module.exports = {
     
                 await player.node.send(data);
     
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                     name: "vibrato"
                 })}`)

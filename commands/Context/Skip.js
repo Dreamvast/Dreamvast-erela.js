@@ -1,4 +1,4 @@
-const { ContextMenuInteraction, MessageEmbed } = require('discord.js');
+const { ContextMenuInteraction, EmbedBuilder } = require('discord.js');
 
 module.exports = { 
     name: "Context | Skip",
@@ -19,7 +19,7 @@ module.exports = {
             await player.destroy();
             await client.UpdateMusic(player);
 
-            const skipped = new MessageEmbed()
+            const skipped = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "music", "skip_msg")}`)
                 .setColor(client.color);
     
@@ -27,7 +27,7 @@ module.exports = {
         } else {
             await player.stop();
 
-            const skipped = new MessageEmbed()
+            const skipped = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "music", "skip_msg")}`)
                 .setColor(client.color);
     

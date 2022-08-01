@@ -1,4 +1,4 @@
-const { ContextMenuInteraction, MessageEmbed } = require('discord.js');
+const { ContextMenuInteraction, EmbedBuilder } = require('discord.js');
 
 module.exports = { 
     name: "Context | Stop",
@@ -18,7 +18,7 @@ module.exports = {
         await player.destroy();
         await client.UpdateMusic(player);
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "music", "leave_msg", {
                 channel: channel.name
             })}`)

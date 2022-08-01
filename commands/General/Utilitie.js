@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const GConfig = require("../../plugins/guildConfig.js")
 
 module.exports = { 
@@ -60,7 +60,7 @@ run: async (interaction, client, user, language) => {
                     playerControl: "disable",
                 });
                 newLang.save().then(() => {
-                    const embed = new MessageEmbed()
+                    const embed = new EmbedBuilder()
                     .setDescription(`${client.i18n.get(language, "utilities", "lang_set", {
                         language: input
                     })}`)
@@ -75,7 +75,7 @@ run: async (interaction, client, user, language) => {
             else if(newLang) {
                 newLang.language = input;
                 newLang.save().then(() => {
-                    const embed = new MessageEmbed()
+                    const embed = new EmbedBuilder()
                     .setDescription(`${client.i18n.get(language, "utilities", "lang_change", {
                         language: input
                     })}`)
@@ -92,7 +92,7 @@ run: async (interaction, client, user, language) => {
         if (interaction.options.getSubcommand() === "restart") {
             if(interaction.user.id != client.owner) return interaction.editReply({ content: `${client.i18n.get(language, "interaction", "owner_only")}` });
 
-            const restart = new MessageEmbed()
+            const restart = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "utilities", "restart_msg")}`)
                 .setColor(client.color);
         
@@ -117,7 +117,7 @@ run: async (interaction, client, user, language) => {
                     playerControl: toggle
                 });
                 guildControl.save().then(() => {
-                    const embed = new MessageEmbed()
+                    const embed = new EmbedBuilder()
                     .setDescription(`${client.i18n.get(language, "utilities", "control_set", {
                         toggle: toggle
                     })}`)
@@ -133,7 +133,7 @@ run: async (interaction, client, user, language) => {
             else if(guildControl) {
                 guildControl.playerControl = toggle;
                 guildControl.save().then(() => {
-                    const embed = new MessageEmbed()
+                    const embed = new EmbedBuilder()
                     .setDescription(`${client.i18n.get(language, "utilities", "control_change", {
                         toggle: toggle
                     })}`)

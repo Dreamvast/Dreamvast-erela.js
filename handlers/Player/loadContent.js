@@ -1,4 +1,4 @@
-const { MessageEmbed, Client } = require("discord.js");
+const { EmbedBuilder, Client } = require("discord.js");
 const GConfig = require("../../plugins/guildConfig.js")
 const delay = require("delay");
 
@@ -46,7 +46,7 @@ try {
                             await player.queue.unshift(player.queue.previous);
                             await player.stop();
 
-                            const embed = new MessageEmbed()
+                            const embed = new EmbedBuilder()
                                 .setDescription(`${client.i18n.get(language, "music", "previous_msg")}`)
                                 .setColor(client.color);
 
@@ -68,7 +68,7 @@ try {
                             await player.destroy();
                             await client.UpdateMusic(player);
 
-                            const embed = new MessageEmbed()
+                            const embed = new EmbedBuilder()
                                 .setDescription(`${client.i18n.get(language, "music", "skip_msg")}`)
                                 .setColor(client.color);
 
@@ -76,7 +76,7 @@ try {
                         } else {
                             await player.stop();
 
-                            const embed = new MessageEmbed()
+                            const embed = new EmbedBuilder()
                                 .setDescription(`${client.i18n.get(language, "music", "skip_msg")}`)
                                 .setColor(client.color);
 
@@ -97,7 +97,7 @@ try {
                             await player.destroy();
                             await client.UpdateMusic(player);
 
-                            const embed = new MessageEmbed()
+                            const embed = new EmbedBuilder()
                                 .setDescription(`${client.i18n.get(language, "player", "stop_msg")}`)
                                 .setColor(client.color);
 
@@ -118,7 +118,7 @@ try {
                             await player.pause(!player.paused);
                             const uni = player.paused ? `${client.i18n.get(language, "player", "switch_pause")}` : `${client.i18n.get(language, "player", "switch_resume")}`;
 
-                            const embed = new MessageEmbed()
+                            const embed = new EmbedBuilder()
                                 .setDescription(`${client.i18n.get(language, "player", "pause_msg", {
                                 pause: uni,
                                 })}`)
@@ -141,7 +141,7 @@ try {
                             await player.setQueueRepeat(!player.queueRepeat);
                             const uni = player.queueRepeat ? `${client.i18n.get(language, "player", "switch_enable")}` : `${client.i18n.get(language, "player", "switch_disable")}`;
                     
-                            const embed = new MessageEmbed()
+                            const embed = new EmbedBuilder()
                                 .setDescription(`${client.i18n.get(language, "player", "repeat_msg", {
                                 loop: uni,
                                 })}`)

@@ -1,4 +1,4 @@
-const { ContextMenuInteraction, MessageEmbed } = require('discord.js');
+const { ContextMenuInteraction, EmbedBuilder } = require('discord.js');
 
 module.exports = { 
     name: "Context | Shuffle",
@@ -17,7 +17,7 @@ module.exports = {
 
 		await player.queue.shuffle();
 
-        const shuffle = new MessageEmbed()
+        const shuffle = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "music", "shuffle_msg")}`)
             .setColor(client.color);
         

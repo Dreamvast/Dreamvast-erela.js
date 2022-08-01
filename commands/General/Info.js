@@ -1,4 +1,4 @@
-const { MessageEmbed, Permissions, MessageActionRow, MessageButton } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, version } = require('discord.js');
 const ms = require('pretty-ms');
 
 module.exports = {
@@ -30,25 +30,27 @@ module.exports = {
         await interaction.deferReply({ ephemeral: false });
         switch (interaction.options.getSubcommand()){
             case "status":
-                const info = new MessageEmbed()
+                const info = new EmbedBuilder()
                     .setTitle(client.user.tag + " Status")
-                    .addField('Uptime', `\`\`\`${ms(client.uptime)}\`\`\``, true)
-                    .addField('WebSocket Ping', `\`\`\`${client.ws.ping}ms\`\`\``, true)
-                    .addField('Memory', `\`\`\`${(process.memoryUsage().rss / 1024 / 1024).toFixed(2)} MB RSS\n${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB Heap\`\`\``, true)
-                    .addField('Guild Count', `\`\`\`${client.guilds.cache.size} guilds\`\`\``, true)
-                    .addField(`User Count`, `\`\`\`${client.users.cache.size} users\`\`\``, true)
-                    .addField('Node', `\`\`\`${process.version} on ${process.platform} ${process.arch}\`\`\``, true)
-                    .addField('Cached Data', `\`\`\`${client.users.cache.size} users\n${client.emojis.cache.size} emojis\`\`\``, true)
-                    .addField('Discord.js', `\`\`\`v13\`\`\``, true)
+                    .addFields([
+                        { name: 'Uptime', value: `\`\`\`${ms(client.uptime)}\`\`\``, inline: true },
+                        { name: 'WebSocket Ping', value: `\`\`\`${client.ws.ping}ms\`\`\``, inline: true },
+                        { name: 'Memory', value: `\`\`\`${(process.memoryUsage().rss / 1024 / 1024).toFixed(2)} MB RSS\n${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB Heap\`\`\``, inline: true },
+                        { name: 'Guild Count', value: `\`\`\`${client.guilds.cache.size} guilds\`\`\``, inline: true },
+                        { name: 'User Count', value: `\`\`\`${client.users.cache.size} users\`\`\``, inline: true },
+                        { name: 'Node', value: `\`\`\`${process.version} on ${process.platform} ${process.arch}\`\`\``, inline: true },
+                        { name: 'Cached Data', value: `\`\`\`${client.users.cache.size} users\n${client.emojis.cache.size} emojis\`\`\``, inline: true },
+                        { name: 'Discord.js', value: `\`\`\`${version}\`\`\``, inline: true },
+                    ])
                     .setTimestamp()
                     .setFooter({ text: "Hope you like me!" })
                     .setColor(client.color);
 
-                const row = new MessageActionRow()
+                const row = new ActionRowBuilder()
                     .addComponents(
-                      new MessageButton()
+                      new ButtonBuilder()
                         .setLabel("Invite Me")
-                        .setStyle("LINK")
+                        .setStyle("Link")
                         .setURL(`https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot%20applications.commands`)
                     )
       
@@ -56,29 +58,29 @@ module.exports = {
             break;
 
             case "developer":
-                const xeondex = new MessageEmbed()
-                .setTitle("Adivise/XeonDex | I'm just remake from Adivise")
-                .setDescription("This is a remade music bot with added features. Special thanks to Adivise.")
-                .setFooter({ text: "Consider Joining the server or Inviting the Bot :) This would help me alot!" })
-                .setColor(client.color);
+                const xeondex = new EmbedBuilder()
+                    .setTitle("Adivise/XeonDex | I'm just remake from Adivise")
+                    .setDescription("This is a remade music bot with added features. Special thanks to Adivise.")
+                    .setFooter({ text: "Consider Joining the server or Inviting the Bot :) This would help me alot!" })
+                    .setColor(client.color);
 
-                const row1 = new MessageActionRow()
+                const row1 = new ActionRowBuilder()
                     .addComponents(
-                      new MessageButton()
+                      new ButtonBuilder()
                         .setLabel("Github (Adivise)")
-                        .setStyle("LINK")
+                        .setStyle("Link")
                         .setURL("https://github.com/Adivise")
                     )
                     .addComponents(
-                      new MessageButton()
+                      new ButtonBuilder()
                         .setLabel("Github (XeonDex)")
-                        .setStyle("LINK")
+                        .setStyle("Link")
                         .setURL("https://github.com/XeonE52680v3")
                     )
                     .addComponents(
-                        new MessageButton()
+                        new ButtonBuilder()
                             .setLabel("Support Server")
-                            .setStyle("LINK")
+                            .setStyle("Link")
                             .setURL("https://discord.com/invite/xHvsCMjnhU")
                     )
 
@@ -87,19 +89,20 @@ module.exports = {
             break;
 
             case "invite":
-                const invite = new MessageEmbed()
+                const invite = new EmbedBuilder()
                     .setTitle(`**Thanks for Inviting ${client.user.username}**`)
                     .setDescription(`**${client.user.username} Powered by Adivise/XeonDex**`)
-                    .addField('Nanospace:', `https://github.com/Adivise/NanoSpacePlus`)
-                    .addField(`${client.user.username}`, `https://top.gg/bot/958642964018642944`)
+                    .addFields([
+                        { name: 'Nanospace', value: 'https://github.com/Adivise/NanoSpacePlus', inline: false }
+                    ])
                     .setTimestamp()
                     .setColor(client.color);
 
-                const row2 = new MessageActionRow()
+                const row2 = new ActionRowBuilder()
                     .addComponents(
-                      new MessageButton()
+                      new ButtonBuilder()
                         .setLabel("Invite Me")
-                        .setStyle("LINK")
+                        .setStyle("Link")
                         .setURL(`https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot%20applications.commands`)
                     )
                   
@@ -107,17 +110,17 @@ module.exports = {
             break;
 
             case "ping":
-                const ping = new MessageEmbed()
+                const ping = new EmbedBuilder()
                     .setTitle("**Ping of **" + client.user.username)
                     .setDescription(`My Ping is ***${client.ws.ping}ms***`)
                     .setTimestamp()
                     .setColor(client.color);
 
-                const row3 = new MessageActionRow()
+                const row3 = new ActionRowBuilder()
                     .addComponents(
-                      new MessageButton()
+                      new ButtonBuilder()
                         .setLabel("Invite Me")
-                        .setStyle("LINK")
+                        .setStyle("Link")
                         .setURL(`https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot%20applications.commands`)
                     )
               

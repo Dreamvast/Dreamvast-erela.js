@@ -1,6 +1,4 @@
-
-  
-const { Client, MessageActionRow, MessageButton } = require("discord.js");
+const { Client, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
   
   /**
    *
@@ -9,54 +7,54 @@ const { Client, MessageActionRow, MessageButton } = require("discord.js");
 
 module.exports = async (client) => {
 
-    client.enSwitch = new MessageActionRow()
+    client.enSwitch = new ActionRowBuilder()
         .addComponents([
-            new MessageButton()
-                .setStyle("SUCCESS")
+            new ButtonBuilder()
+                .setStyle("Success")
                 .setCustomId("spause")
                 .setEmoji("⏯"),
-            new MessageButton()
-                .setStyle("PRIMARY")
+            new ButtonBuilder()
+                .setStyle("Primary")
                 .setCustomId("sprevious")
                 .setEmoji("⬅"),
-            new MessageButton()
-                .setStyle("DANGER")
+            new ButtonBuilder()
+                .setStyle("Danger")
                 .setCustomId("sstop")
                 .setEmoji("⏹"),
-            new MessageButton()
-                .setStyle("PRIMARY")
+            new ButtonBuilder()
+                .setStyle("Primary")
                 .setCustomId("sskip")
                 .setEmoji("➡"),
-            new MessageButton()
-                .setStyle("SUCCESS")
+            new ButtonBuilder()
+                .setStyle("Success")
                 .setCustomId("sloop")
                 .setEmoji("🔄"),
         ]);
 
-    client.diSwitch = new MessageActionRow()
+    client.diSwitch = new ActionRowBuilder()
         .addComponents([
-            new MessageButton()
-                .setStyle("SECONDARY")
+            new ButtonBuilder()
+                .setStyle("Secondary")
                 .setCustomId("spause")
                 .setEmoji("⏯")
                 .setDisabled(true),
-            new MessageButton()
-                .setStyle("SECONDARY")
+            new ButtonBuilder()
+                .setStyle("Secondary")
                 .setCustomId("sprevious")
                 .setEmoji("⬅")
                 .setDisabled(true),
-            new MessageButton()
-                .setStyle("SECONDARY")
+            new ButtonBuilder()
+                .setStyle("Secondary")
                 .setCustomId("sstop")
                 .setEmoji("⏹")
                 .setDisabled(true),
-            new MessageButton()
-                .setStyle("SECONDARY")
+            new ButtonBuilder()
+                .setStyle("Secondary")
                 .setCustomId("sskip")
                 .setEmoji("➡")
                 .setDisabled(true),
-            new MessageButton()
-                .setStyle("SECONDARY")
+            new ButtonBuilder()
+                .setStyle("Secondary")
                 .setCustomId("sloop")
                 .setEmoji("🔄")
                 .setDisabled(true),

@@ -1,4 +1,4 @@
-const { Permissions } = require("discord.js");
+const { PermissionsBitField } = require("discord.js");
 const GConfig = require("../../plugins/guildConfig.js")
 const chalk = require('chalk');
 const logger = require("../../plugins/logger");
@@ -23,13 +23,13 @@ module.exports = async(client, interaction) => {
             return;
         }
 
-        if(!interaction.guild.me.permissions.has(Permissions.FLAGS.SEND_MESSAGES)) return interaction.user.dmChannel.send(`${client.i18n.get(language, "interaction", "no_perms")}`);
-        if(!interaction.guild.me.permissions.has(Permissions.FLAGS.VIEW_CHANNEL)) return;
-        if(!interaction.guild.me.permissions.has(Permissions.FLAGS.EMBED_LINKS)) return interaction.reply(`${client.i18n.get(language, "interaction", "no_perms")}`);
-        if(!interaction.guild.me.permissions.has(Permissions.FLAGS.SPEAK)) return interaction.reply(`${client.i18n.get(language, "interaction", "no_perms")}`);
-        if(!interaction.guild.me.permissions.has(Permissions.FLAGS.CONNECT)) return interaction.reply(`${client.i18n.get(language, "interaction", "no_perms")}`);
-        if(!interaction.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) return interaction.reply(`${client.i18n.get(language, "interaction", "no_perms")}`);
-        if(!interaction.guild.me.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return await interaction.reply(`${client.i18n.get(language, "interaction", "no_perms")}`);
+        if(!interaction.guild.members.cache.get(client.user.id).permissions.has(PermissionsBitField.Flags.SendMessages)) return interaction.user.dmChannel.send(`${client.i18n.get(language, "interaction", "no_perms")}`);
+        if(!interaction.guild.members.cache.get(client.user.id).permissions.has(PermissionsBitField.Flags.ViewChannel)) return;
+        if(!interaction.guild.members.cache.get(client.user.id).permissions.has(PermissionsBitField.Flags.EmbedLinks)) return interaction.reply(`${client.i18n.get(language, "interaction", "no_perms")}`);
+        if(!interaction.guild.members.cache.get(client.user.id).permissions.has(PermissionsBitField.Flags.Speak)) return interaction.reply(`${client.i18n.get(language, "interaction", "no_perms")}`);
+        if(!interaction.guild.members.cache.get(client.user.id).permissions.has(PermissionsBitField.Flags.Connect)) return interaction.reply(`${client.i18n.get(language, "interaction", "no_perms")}`);
+        if(!interaction.guild.members.cache.get(client.user.id).permissions.has(PermissionsBitField.Flags.ManageMessages)) return interaction.reply(`${client.i18n.get(language, "interaction", "no_perms")}`);
+        if(!interaction.guild.members.cache.get(client.user.id).permissions.has(PermissionsBitField.Flags.ManageChannels)) return await interaction.reply(`${client.i18n.get(language, "interaction", "no_perms")}`);
 
         if (command) {
             try {
