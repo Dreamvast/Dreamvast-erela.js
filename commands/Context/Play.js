@@ -2,7 +2,7 @@ const { ContextMenuInteraction, EmbedBuilder, PermissionsBitField } = require('d
 const { convertTime } = require("../../structures/ConvertTime.js");
 
 module.exports = { 
-    name: "Context | Play",
+    name: "Play",
     type: 3,
     /**
      * @param {ContextMenuInteraction} interaction

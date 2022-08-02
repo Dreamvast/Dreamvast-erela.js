@@ -6,13 +6,10 @@ const Deezer = require("../plugins/Deezer");
 const AppleMusic = require("erela.js-apple")
 const Facebook = require("erela.js-facebook");
 const { I18n } = require("locale-parser")
-const Cluster = require('discord-hybrid-sharding');
 
 class MainClient extends Client {
      constructor() {
         super({
-          // shards: Cluster.data.SHARD_LIST,
-          // shardCount: Cluster.data.TOTAL_SHARDS,
           shards: 'auto',
             allowedMentions: {
                 parse: ["roles", "users", "everyone"],
