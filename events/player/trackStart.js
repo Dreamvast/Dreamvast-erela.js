@@ -39,85 +39,79 @@ module.exports = async (client, player, track, payload) => {
       .setDescription(`**[${track.title}](${track.uri})**`)
       .setColor(client.color)
       .setThumbnail(`https://img.youtube.com/vi/${track.identifier}/hqdefault.jpg`)
-      .addField(`${client.i18n.get(language, "player", "author_title")}`, `${track.author}`, true)
-      .addField(`${client.i18n.get(language, "player", "request_title")}`, `${track.requester}`, true)
-      .addField(`${client.i18n.get(language, "player", "volume_title")}`, `${player.volume}%`, true)
-      .addField(`${client.i18n.get(language, "player", "queue_title")}`, `${player.queue.length}`, true)
-      .addField(`${client.i18n.get(language, "player", "duration_title")}`, `${formatduration(track.duration, true)}`, true)
-      .addField(`${client.i18n.get(language, "player", "total_duration_title")}`, `${formatduration(player.queue.duration)}`, true)
-      .addField(`${client.i18n.get(language, "player", "current_duration_title", {
-        current_duration: formatduration(track.duration, true),
-      })}`, `\`\`\`🔴 | 🎶──────────────────────────────\`\`\``)
+      .addFields([
+        { name: `${client.i18n.get(language, "player", "author_title")}`, value: `${track.author}`, inline: true },
+        { name: `${client.i18n.get(language, "player", "request_title")}`, value: `${track.requester}`, inline: true },
+        { name: `${client.i18n.get(language, "player", "volume_title")}`, value: `${player.volume}%`, inline: true },
+        { name: `${client.i18n.get(language, "player", "queue_title")}`, value: `${player.queue.length}`, inline: true },
+        { name: `${client.i18n.get(language, "player", "duration_title")}`, value: `${formatduration(track.duration, true)}`, inline: true },
+        { name: `${client.i18n.get(language, "player", "total_duration_title")}`, value: `${formatduration(player.queue.duration)}`, inline: true },
+        { name: `${client.i18n.get(language, "player", "current_duration_title", {
+          current_duration: formatduration(track.duration, true),
+        })}`, value: `\`\`\`🔴 | 🎶──────────────────────────────\`\`\``, inline: false },
+      ])
       .setTimestamp();
     
     const row = new ActionRowBuilder()
-      .addComponents(
-        new ButtonBuilder()
-          .setCustomId("pause")
-          .setEmoji("⏯")
-          .setStyle("Success")
-      )
-      .addComponents(
-        new ButtonBuilder()
-          .setCustomId("replay")
-          .setEmoji("⬅")
-          .setStyle("Primary")
-      )
-      .addComponents(
-        new ButtonBuilder()
-          .setCustomId("stop")
-          .setEmoji("✖")
-          .setStyle("Danger")
-      )
-      .addComponents(
-        new ButtonBuilder()
-          .setCustomId("skip")
-          .setEmoji("➡")
-          .setStyle("Primary")
-      )
-      .addComponents(
-        new ButtonBuilder()
-          .setCustomId("loop")
-          .setEmoji("🔄")
-          .setStyle("Success")
-      )
+    .addComponents([
+      new ButtonBuilder()
+      .setCustomId("pause")
+      .setEmoji("⏯")
+      .setStyle("Success"),
+
+      new ButtonBuilder()
+        .setCustomId("replay")
+        .setEmoji("⬅")
+        .setStyle("Primary"),
+      
+      new ButtonBuilder()
+        .setCustomId("stop")
+        .setEmoji("✖")
+        .setStyle("Danger"),
+
+      new ButtonBuilder()
+        .setCustomId("skip")
+        .setEmoji("➡")
+        .setStyle("Primary"),
+
+      new ButtonBuilder()
+        .setCustomId("loop")
+        .setEmoji("🔄")
+        .setStyle("Success")
+    ])
     
     const row2 = new ActionRowBuilder()
-      .addComponents(
+      .addComponents([
         new ButtonBuilder()
           .setCustomId("shuffle")
           .setEmoji("🔀")
-          .setStyle("Success")
-      )
-      .addComponents(
+          .setStyle("Success"),
+
         new ButtonBuilder()
           .setCustomId("voldown")
           .setEmoji("🔉")
-          .setStyle("Primary")
-      )
-      .addComponents(
+          .setStyle("Primary"),
+
         new ButtonBuilder()
           .setCustomId("clear")
           .setEmoji("🗑")
-          .setStyle("Danger")
-      )
-      .addComponents(
+          .setStyle("Danger"),
+
         new ButtonBuilder()
           .setCustomId("volup")
           .setEmoji("🔊")
-          .setStyle("Primary")
-      )
-      .addComponents(
+          .setStyle("Primary"),
+
         new ButtonBuilder()
           .setCustomId("queue")
           .setEmoji("📋")
           .setStyle("Success")
-      )
+      ])
     
     const nplaying = await client.channels.cache.get(player.textChannel).send({ embeds: [embeded], components: [row, row2] });
 
     const filter = (message) => {
-      if(message.guild.me.voice.channel && message.guild.me.voice.channelId === message.member.voice.channelId) return true;
+      if(message.guild.members.me.voice.channel && message.guild.members.me.voice.channelId === message.member.voice.channelId) return true;
       else {
         message.reply({ content: `${client.i18n.get(language, "player", "join_voice")}`, ephemeral: true });
       }

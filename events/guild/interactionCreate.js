@@ -4,7 +4,7 @@ const chalk = require('chalk');
 const logger = require("../../plugins/logger");
 
 module.exports = async(client, interaction) => {
-    if (interaction.isCommand() || interaction.isContextMenu()) {
+    if (interaction.isChatInputCommand() || interaction.isContextMenuCommand()) {
         if (!client.slash.has(interaction.commandName)) return;
         if (!interaction.guild) return;
 

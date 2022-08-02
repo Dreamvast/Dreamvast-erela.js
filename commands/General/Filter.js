@@ -180,7 +180,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
     
                 const data = {
                     op: 'filters',
@@ -208,7 +208,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
         
                 const data = {
                     op: 'filters',
@@ -249,7 +249,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_voice")}`);
     
             if(!value) {
                 const data = {
@@ -332,7 +332,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
     
                 const data = {
                     op: 'filters',
@@ -364,7 +364,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
     
                 const data = {
                     op: 'filters',
@@ -396,7 +396,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
         
                 const data = {
                     op: 'filters',
@@ -428,7 +428,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
         
                 const data = {
                     op: 'filters',
@@ -475,7 +475,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
         
                 const data = {
                     op: 'filters',
@@ -505,7 +505,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
         
             await player.setVolume(500);
             const data = {
@@ -530,7 +530,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_voice")}`);
     
             if (!value) {
                 const embed = new EmbedBuilder()
@@ -599,13 +599,13 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
         
                 const data = {
                     op: 'filters',
                     guildId: interaction.guild.id,
                     timescale: {
-                        speed: 1.165,
+                        speed: 1.1,
                         pitch: 1.125,
                         rate: 1.05
                     },
@@ -629,7 +629,7 @@ module.exports = {
             const player = client.manager.get(interaction.guild.id);
             if(!player) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_player")}`);
             const { channel } = interaction.member.voice;
-            if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+            if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_voice")}`);
     
         //	if (isNaN(value)) return interaction.editReply(`${client.i18n.get(language, "filters", "filter_number")}`);
             if (value < 0) return interaction.editReply(`${client.i18n.get(language, "filters", "filter_greater")}`);
@@ -663,7 +663,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
         
                 const data = {
                     op: 'filters',
@@ -704,7 +704,7 @@ module.exports = {
             const player = client.manager.get(interaction.guild.id);
             if(!player) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_player")}`);
             const { channel } = interaction.member.voice;
-            if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+            if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_voice")}`);
     
         //	if (isNaN(value)) return interaction.editReply(`${client.i18n.get(language, "filters", "filter_number")}`);
             if (value < 0) return interaction.editReply(`${client.i18n.get(language, "filters", "filter_greater")}`);
@@ -736,7 +736,7 @@ module.exports = {
             const player = client.manager.get(interaction.guild.id);
             if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
             const { channel } = interaction.member.voice;
-            if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+            if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
     
             const data = {
                 op: 'filters',
@@ -762,7 +762,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
     
                 const data = {
                     op: 'filters',
@@ -794,7 +794,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
             
                 const data = {
                     op: 'filters',
@@ -835,7 +835,7 @@ module.exports = {
             const player = client.manager.get(interaction.guild.id);
             if(!player) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_player")}`);
             const { channel } = interaction.member.voice;
-            if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+            if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_voice")}`);
     
         //	if (isNaN(args[0])) return interaction.editReply(`${client.i18n.get(language, "filters", "filter_number")}`);
             if (value < 0) return interaction.editReply(`${client.i18n.get(language, "filters", "filter_greater")}`);
@@ -869,7 +869,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
     
                 const data = {
                     op: 'filters',
@@ -912,7 +912,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
             
                 const data = {
                     op: 'filters',
@@ -955,7 +955,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
         
                 const data = {
                     op: 'filters',
@@ -998,7 +998,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
     
                 const data = {
                     op: 'filters',
@@ -1029,7 +1029,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
     
                 const data = {
                     op: 'filters',
@@ -1075,7 +1075,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
     
                 const data = {
                     op: 'filters',
@@ -1110,7 +1110,7 @@ module.exports = {
                 const player = client.manager.get(interaction.guild.id);
                 if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = interaction.member.voice;
-                if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
     
                 const data = {
                     op: 'filters',

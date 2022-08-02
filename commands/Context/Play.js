@@ -1,4 +1,4 @@
-const { ContextMenuInteraction, ButtonBuilder, PermissionsBitField } = require('discord.js');
+const { ContextMenuInteraction, EmbedBuilder, PermissionsBitField } = require('discord.js');
 const { convertTime } = require("../../structures/ConvertTime.js");
 
 module.exports = { 
@@ -17,8 +17,8 @@ module.exports = {
         
         const { channel } = interaction.member.voice;
         if (!channel) return msg.edit(`${client.i18n.get(language, "music", "play_invoice")}`);
-        if (!channel.permissionsFor(interaction.guild.me).has(PermissionsBitField.Flags.Connect)) return msg.edit(`${client.i18n.get(language, "music", "play_join")}`);
-        if (!channel.permissionsFor(interaction.guild.me).has(PermissionsBitField.Flags.Speak)) return msg.edit(`${client.i18n.get(language, "music", "play_speak")}`);
+        if (!interaction.guild.members.cache.get(client.user.id).permissions.has(PermissionsBitField.Flags.Connect)) return msg.edit(`${client.i18n.get(language, "music", "play_join")}`);
+        if (!interaction.guild.members.cache.get(client.user.id).permissions.has(PermissionsBitField.Flags.Speak)) return msg.edit(`${client.i18n.get(language, "music", "play_speak")}`);
 
         const player = await client.manager.create({
             guild: interaction.guild.id,

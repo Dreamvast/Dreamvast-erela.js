@@ -7,11 +7,11 @@ const SlashPage = async (client, message, pages, timeout, queueLength, queueDura
     const row1 = new ButtonBuilder()
         .setCustomId('back')
         .setLabel('⬅')
-        .setStyle('PRIMARY')
+        .setStyle('Primary')
     const row2 = new ButtonBuilder()
         .setCustomId('next')
         .setLabel('➡')
-        .setStyle('PRIMARY')
+        .setStyle('Primary')
     const row = new ActionRowBuilder()
         .addComponents(row1, row2)
 
