@@ -4,7 +4,6 @@
 - [x] Music System
 - [x] Playlists System
 - [x] Premium System
-- [x] Setup Request System
 - [x] Multi Language
 - [x] SlashCommand
 - [x] ContextMenus
@@ -185,6 +184,7 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 📑 **Utilities Commands!**
 - Restart (/utilitie restart) // (OWNER ONLY)
 - Language (/utilitie language input: [language] ) // Example: en, th
+- Control (/utilitie control input: [enable or disable (default: disable)])
 
 </p>
 </details>
