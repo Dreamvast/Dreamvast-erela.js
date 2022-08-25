@@ -5,6 +5,7 @@ const dreamvast = chalk.hex('#008dde');
 
 module.exports = async (client) => {
     await client.manager.init(client.user.id);
+    logger.info(`${client.user.tag} is ready!`)
 
     figlet(client.user.tag, function(err, data) {
         if (err) {

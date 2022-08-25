@@ -33,8 +33,8 @@
     "winston": "^3.8.1"
   },
   "scripts": {
-    "start": "node --no-warnings index.js",
-    "dev": "nodemon index.js"
+    "start": "node --no-warnings ./src/index.js",
+    "dev": "nodemon ./src/index.js"
   },
   "author": "XeonDex",
   "license": "Apache-2.0",

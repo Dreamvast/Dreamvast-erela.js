@@ -18,9 +18,9 @@ const { readdirSync } = require('fs');
 
         const commands = [];
 
-        readdirSync("./commands/").map(async dir => {
-            readdirSync(`./commands/${dir}`).map(async (cmd) => {
-                commands.push(require(path.join(__dirname, `./commands/${dir}/${cmd}`)));
+        readdirSync("./src/commands/").map(async dir => {
+            readdirSync(`./src/commands/${dir}`).map(async (cmd) => {
+                commands.push(require(path.join(__dirname, `./src/commands/${dir}/${cmd}`)));
             })
         })
 
