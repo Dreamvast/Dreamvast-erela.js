@@ -537,9 +537,9 @@ module.exports = {
                     .setAuthor({ name: `${client.i18n.get(language, "filters", "eq_author")}`, iconURL: `${client.i18n.get(language, "filters", "eq_icon")}` })
                     .setColor(client.color)
                     .setDescription(`${client.i18n.get(language, "filters", "eq_desc")}`)
-                    .addField(`${client.i18n.get(language, "filters", "eq_field_title")}`, `${client.i18n.get(language, "filters", "eq_field_value", {
+                    .addFields({ name: `${client.i18n.get(language, "filters", "eq_field_title")}`, value: `${client.i18n.get(language, "filters", "eq_field_value", {
                         prefix: "/"
-                    })}`)
+                    })}`})
                     .setFooter({ text: `${client.i18n.get(language, "filters", "eq_footer", {
                         prefix: "/"
                     })}` })

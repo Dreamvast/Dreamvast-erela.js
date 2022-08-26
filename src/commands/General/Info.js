@@ -43,7 +43,6 @@ module.exports = {
                         { name: 'Discord.js', value: `\`\`\`${version}\`\`\``, inline: true },
                     ])
                     .setTimestamp()
-                    .setFooter({ text: "Hope you like me!" })
                     .setColor(client.color);
 
                 const row = new ActionRowBuilder()
@@ -59,9 +58,9 @@ module.exports = {
 
             case "developer":
                 const xeondex = new EmbedBuilder()
-                    .setTitle("Adivise/XeonDex | I'm just remake from Adivise")
-                    .setDescription("This is a remade music bot with added features. Special thanks to Adivise.")
-                    .setFooter({ text: "Consider Joining the server or Inviting the Bot :) This would help me alot!" })
+                    .setTitle(`${client.i18n.get(language, "info", "dev_title")}`)
+                    .setDescription(`${client.i18n.get(language, "info", "dev_desc")}`)
+                    .setFooter({ text: `${client.i18n.get(language, "info", "dev_foot")}` })
                     .setColor(client.color);
 
                 const row1 = new ActionRowBuilder()
@@ -90,8 +89,8 @@ module.exports = {
 
             case "invite":
                 const invite = new EmbedBuilder()
-                    .setTitle(`**Thanks for Inviting ${client.user.username}**`)
-                    .setDescription(`**${client.user.username} Powered by Adivise/XeonDex**`)
+                    .setTitle(`${client.i18n.get(language, "info", "inv_title" , { username: client.user.username })}`)
+                    .setDescription(`${client.i18n.get(language, "info", "inv_desc", { username: client.user.username })}`)
                     .addFields([
                         { name: 'Nanospace', value: 'https://github.com/Adivise/NanoSpacePlus', inline: false }
                     ])
@@ -111,8 +110,8 @@ module.exports = {
 
             case "ping":
                 const ping = new EmbedBuilder()
-                    .setTitle("**Ping of **" + client.user.username)
-                    .setDescription(`My Ping is ***${client.ws.ping}ms***`)
+                    .setTitle(`${client.i18n.get(language, "info", "ping_title")}` + client.user.username)
+                    .setDescription(`${client.i18n.get(language, "info", "ping_desc", { ping: client.ws.ping })}`)
                     .setTimestamp()
                     .setColor(client.color);
 

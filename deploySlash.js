@@ -1,7 +1,7 @@
 const { plsParseArgs } = require('plsargs');
 const argv = plsParseArgs(process.argv.slice(2));
 const path = require("path");
-const { TOKEN } = require("./plugins/config.js");
+const { TOKEN } = require("./src/plugins/config.js");
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v10');
 const { readdirSync } = require('fs');

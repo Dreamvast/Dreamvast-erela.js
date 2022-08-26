@@ -29,10 +29,20 @@ module.exports = {
             type: 1,
             options: [
                 {
-                    name: "toggle",
+                    name: "type",
                     description: "Choose enable or disable",
+                    type: 3,
                     required: true,
-                    type: 3
+                    choices: [
+                        {
+                            name: "Enable",
+                            value: "enable"
+                        },
+                        {
+                            name: "Disable",
+                            value: "disable"
+                        }
+                    ]
                 }
             ]
         }
@@ -98,45 +108,82 @@ run: async (interaction, client, language) => {
         }
         ///// CONTROL COMMAND!
         if (interaction.options.getSubcommand() === "control"){
-            const toggle = interaction.options.getString("toggle");
 
             if (!interaction.member.permissions.has('MANAGE_GUILD')) return interaction.editReply(`${client.i18n.get(language, "utilities", "control_perm")}`);
-            if(toggle !== 'enable' && toggle !== 'disable') return message.channel.send(`${client.i18n.get(language, "utilities", "control_invaild")}`);
             const Control = await GControl.findOne({ guild: interaction.guild.id });
-            if(!Control) {
-                const Control = new GControl({
-                    guild: interaction.guild.id,
-                    playerControl: toggle
-                });
-                Control.save().then(() => {
-                    const embed = new EmbedBuilder()
-                    .setDescription(`${client.i18n.get(language, "utilities", "control_set", {
-                        toggle: toggle
-                    })}`)
-                    .setColor(client.color)
-
-                    interaction.editReply({ embeds: [embed] });
+            if(interaction.options._hoistedOptions.find(c => c.value === "enable")) {
+                if(!Control) {
+                    const Control = new GControl({
+                        guild: interaction.guild.id,
+                        playerControl: "enable"
+                    });
+                    Control.save().then(() => {
+                        const embed = new EmbedBuilder()
+                        .setDescription(`${client.i18n.get(language, "utilities", "control_set", {
+                            toggle: "enable"
+                        })}`)
+                        .setColor(client.color)
+    
+                        interaction.editReply({ embeds: [embed] });
+                    }
+                    ).catch((err) => {
+                        interaction.editReply(`${client.i18n.get(language, "utilities", "control_err")}`)
+                        console.log(err)
+                    });
                 }
-                ).catch((err) => {
-                    interaction.editReply(`${client.i18n.get(language, "utilities", "control_err")}`)
-                    console.log(err)
-                });
+                else if(Control) {
+                    Control.playerControl = "enable";
+                    Control.save().then(() => {
+                        const embed = new EmbedBuilder()
+                        .setDescription(`${client.i18n.get(language, "utilities", "control_change", {
+                            toggle: "enable"
+                        })}`)
+                        .setColor(client.color)
+            
+                        interaction.editReply({ embeds: [embed] });
+                    }
+                    ).catch((err) => {
+                        interaction.editReply(`${client.i18n.get(language, "utilities", "control_err")}`);
+                        console.log(err)
+                    });
+                }
             }
-            else if(Control) {
-                Control.playerControl = toggle;
-                Control.save().then(() => {
-                    const embed = new EmbedBuilder()
-                    .setDescription(`${client.i18n.get(language, "utilities", "control_change", {
-                        toggle: toggle
-                    })}`)
-                    .setColor(client.color)
-        
-                    interaction.editReply({ embeds: [embed] });
+            else if(interaction.options._hoistedOptions.find(c => c.value === "disable")) {
+                if(!Control) {
+                    const Control = new GControl({
+                        guild: interaction.guild.id,
+                        playerControl: "disable"
+                    });
+                    Control.save().then(() => {
+                        const embed = new EmbedBuilder()
+                        .setDescription(`${client.i18n.get(language, "utilities", "control_set", {
+                            toggle: "disable"
+                        })}`)
+                        .setColor(client.color)
+    
+                        interaction.editReply({ embeds: [embed] });
+                    }
+                    ).catch((err) => {
+                        interaction.editReply(`${client.i18n.get(language, "utilities", "control_err")}`)
+                        console.log(err)
+                    });
                 }
-                ).catch((err) => {
-                    interaction.editReply(`${client.i18n.get(language, "utilities", "control_err")}`);
-                    console.log(err)
-                });
+                else if(Control) {
+                    Control.playerControl = "disable"
+                    Control.save().then(() => {
+                        const embed = new EmbedBuilder()
+                        .setDescription(`${client.i18n.get(language, "utilities", "control_change", {
+                            toggle: "disable"
+                        })}`)
+                        .setColor(client.color)
+            
+                        interaction.editReply({ embeds: [embed] });
+                    }
+                    ).catch((err) => {
+                        interaction.editReply(`${client.i18n.get(language, "utilities", "control_err")}`);
+                        console.log(err)
+                    });
+                }
             }
         }
     }
