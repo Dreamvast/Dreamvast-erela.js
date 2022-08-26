@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require('discord.js');
-const GConfig = require("../../plugins/guildConfig.js")
-
+const GLang = require('../../plugins/schemas/language.js'); 
+const GControl = require('../../plugins/schemas/control.js')
 module.exports = { 
     name: "utilitie",
     description: "Utilitie Command!",
@@ -37,7 +37,7 @@ module.exports = {
             ]
         }
     ],
-run: async (interaction, client, user, language) => {
+run: async (interaction, client, language) => {
         await interaction.deferReply({ ephemeral: false });
         ///// CHANGE LANGUAGE COMMAND!
         if (interaction.options.getSubcommand() === "language") {
@@ -49,15 +49,11 @@ run: async (interaction, client, user, language) => {
                 languages: languages.join(', ')
             })}`);
     
-            const newLang = await GConfig.findOne({ guild: interaction.guild.id });
+            const newLang = await GLang.findOne({ guild: interaction.guild.id });
             if(!newLang) {
-                const newLang = new GConfig({
+                const newLang = new GLang({
                     guild: interaction.guild.id,
-                    enable: false,
-                    channel: "",
-                    playmsg: "",
                     language: input,
-                    playerControl: "disable",
                 });
                 newLang.save().then(() => {
                     const embed = new EmbedBuilder()
@@ -100,23 +96,19 @@ run: async (interaction, client, user, language) => {
                     
             process.exit();
         }
-
+        ///// CONTROL COMMAND!
         if (interaction.options.getSubcommand() === "control"){
             const toggle = interaction.options.getString("toggle");
 
             if (!interaction.member.permissions.has('MANAGE_GUILD')) return interaction.editReply(`${client.i18n.get(language, "utilities", "control_perm")}`);
             if(toggle !== 'enable' && toggle !== 'disable') return message.channel.send(`${client.i18n.get(language, "utilities", "control_invaild")}`);
-            const guildControl = await GConfig.findOne({ guild: interaction.guild.id });
-            if(!guildControl) {
-                const guildControl = new GConfig({
+            const Control = await GControl.findOne({ guild: interaction.guild.id });
+            if(!Control) {
+                const Control = new GControl({
                     guild: interaction.guild.id,
-                    enable: false,
-                    channel: "",
-                    playmsg: "",
-                    language: "en",
                     playerControl: toggle
                 });
-                guildControl.save().then(() => {
+                Control.save().then(() => {
                     const embed = new EmbedBuilder()
                     .setDescription(`${client.i18n.get(language, "utilities", "control_set", {
                         toggle: toggle
@@ -130,9 +122,9 @@ run: async (interaction, client, user, language) => {
                     console.log(err)
                 });
             }
-            else if(guildControl) {
-                guildControl.playerControl = toggle;
-                guildControl.save().then(() => {
+            else if(Control) {
+                Control.playerControl = toggle;
+                Control.save().then(() => {
                     const embed = new EmbedBuilder()
                     .setDescription(`${client.i18n.get(language, "utilities", "control_change", {
                         toggle: toggle

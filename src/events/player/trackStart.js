@@ -1,38 +1,43 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, } = require("discord.js");
 const formatduration = require('../../structures/FormatDuration.js');
-const GConfig = require("../../plugins/guildConfig.js")
+const GControl = require("../../plugins/schemas/control.js")
+const GLang = require("../../plugins/schemas/language.js")
+const Setup = require("../../plugins/schemas/setup.js")
   
 module.exports = async (client, player, track, payload) => {
-  let GuildControl = await GConfig.findOne({ guild: player.guild });
-  if (!GuildControl) {
-    GuildControl = await GConfig.create({
+  let Control = await GControl.findOne({ guild: player.guild });
+  if (!Control) {
+    Control = await GControl.create({
       guild: player.guild,
-      enable: false,
-      channel: "",
-      playmsg: "",
-      language: "en",
       playerControl: "disable",
     });
   }
 
-  if (GuildControl.playerControl === 'enable'){
+  if (Control.playerControl === 'enable'){
+    if(!player) return;
+
+    /////////// Update Music Setup ///////////
+
+    await client.UpdateQueueMsg(player);
+
+    /////////// Update Music Setup ///////////
+
     const channel = client.channels.cache.get(player.textChannel);
     if (!channel) return;
 
-    let guildModel = await GConfig.findOne({
-      guild: channel.guild.id,
-    });
-    if (!guildModel) {
-      guildModel = await GConfig.create({
-        guild: channel.guild.id,
-        enable: false,
-        channel: "",
-        playmsg: "",
-        language: "en",
-        playerControl: "disable",
-      });
-    }
-    const { language } = guildModel;
+    let data = await Setup.findOne({ guild: channel.guild.id });
+    if (player.textChannel === data.channel) return;
+
+		let guildModel = await GLang.findOne({
+			guild: channel.guild.id,
+		});
+		if (!guildModel) {
+			guildModel = await GLang.create({
+				guild: channel.guild.id,
+				language: "en",
+			});
+		}
+		const { language } = guildModel;
   
     const embeded = new EmbedBuilder()
       .setAuthor({ name: `${client.i18n.get(language, "player", "track_title")}`, iconURL: `${client.i18n.get(language, "player", "track_icon")}` })
@@ -290,7 +295,7 @@ module.exports = async (client, player, track, payload) => {
         nplaying.edit({ embeds: [embeded], components: [] })
       }
     });
-  } else if(GuildControl.playerControl === 'disable'){
+  } else if(Control.playerControl === 'disable'){
     null
   }
 }

@@ -26,7 +26,7 @@ module.exports = {
             type: 1
         }
     ],
-    run: async (interaction, client, user, language) => {
+    run: async (interaction, client, language) => {
         await interaction.deferReply({ ephemeral: false });
         switch (interaction.options.getSubcommand()){
             case "status":

@@ -169,7 +169,7 @@ module.exports = {
             type: 1
         }
     ],
-    run: async (interaction, client, user, language) => {
+    run: async (interaction, client, language) => {
         await interaction.deferReply({ ephemeral: false });
         //// 3d COMMAND
         if (interaction.options.getSubcommand() === "3d") {

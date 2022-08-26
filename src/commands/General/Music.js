@@ -2,7 +2,6 @@ const { EmbedBuilder, PermissionsBitField, ActionRowBuilder, ButtonBuilder, } = 
 const formatDuration = require('../../structures/FormatDuration.js');
 const { convertTime } = require("../../structures/ConvertTime.js");
 const { SlashPage } = require('../../structures/PageQueue.js');
-const GConfig = require("../../plugins/guildConfig.js")
 const lyricsfinder = require('lyrics-finder');
 const logger = require('../../plugins/logger')
 
@@ -241,7 +240,7 @@ module.exports = {
             ]/// SUBCOMMAND! = 1
         },
     ],
-    run: async (interaction, client, user, language) => {
+    run: async (interaction, client, language) => {
         await interaction.deferReply({ ephemeral: false });
 
         if (interaction.options.getSubcommand() === "autoplay") {

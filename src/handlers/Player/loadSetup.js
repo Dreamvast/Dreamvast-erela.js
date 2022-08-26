@@ -10,23 +10,23 @@ module.exports = async (client) => {
     client.enSwitch = new ActionRowBuilder()
         .addComponents([
             new ButtonBuilder()
-                .setStyle("Success")
+                .setStyle(ButtonStyle.Success)
                 .setCustomId("spause")
                 .setEmoji("⏯"),
             new ButtonBuilder()
-                .setStyle("Primary")
+                .setStyle(ButtonStyle.Primary)
                 .setCustomId("sprevious")
                 .setEmoji("⬅"),
             new ButtonBuilder()
-                .setStyle("Danger")
+                .setStyle(ButtonStyle.Danger)
                 .setCustomId("sstop")
                 .setEmoji("⏹"),
             new ButtonBuilder()
-                .setStyle("Primary")
+                .setStyle(ButtonStyle.Primary)
                 .setCustomId("sskip")
                 .setEmoji("➡"),
             new ButtonBuilder()
-                .setStyle("Success")
+                .setStyle(ButtonStyle.Success)
                 .setCustomId("sloop")
                 .setEmoji("🔄"),
         ]);
@@ -34,27 +34,27 @@ module.exports = async (client) => {
     client.diSwitch = new ActionRowBuilder()
         .addComponents([
             new ButtonBuilder()
-                .setStyle("Secondary")
+                .setStyle(ButtonStyle.Secondary)
                 .setCustomId("spause")
                 .setEmoji("⏯")
                 .setDisabled(true),
             new ButtonBuilder()
-                .setStyle("Secondary")
+                .setStyle(ButtonStyle.Secondary)
                 .setCustomId("sprevious")
                 .setEmoji("⬅")
                 .setDisabled(true),
             new ButtonBuilder()
-                .setStyle("Secondary")
+                .setStyle(ButtonStyle.Secondary)
                 .setCustomId("sstop")
                 .setEmoji("⏹")
                 .setDisabled(true),
             new ButtonBuilder()
-                .setStyle("Secondary")
+                .setStyle(ButtonStyle.Secondary)
                 .setCustomId("sskip")
                 .setEmoji("➡")
                 .setDisabled(true),
             new ButtonBuilder()
-                .setStyle("Secondary")
+                .setStyle(ButtonStyle.Secondary)
                 .setCustomId("sloop")
                 .setEmoji("🔄")
                 .setDisabled(true),

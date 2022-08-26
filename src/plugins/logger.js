@@ -14,7 +14,7 @@ const logger = createLogger({
 	transports: [
 		new transports.Console(),
 		new transports.File({
-            filename: '../logs/springtime.log',
+            filename: './logs/springtime.log',
             maxsize: '5,242,880'
         })
 	]
