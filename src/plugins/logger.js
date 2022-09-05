@@ -10,13 +10,19 @@ const customFormat = format.combine(format.timestamp({ format: timezoned }), for
 }))
 
 const logger = createLogger({
+    level: 'info',
 	format: customFormat,
 	transports: [
 		new transports.Console(),
-		new transports.File({
-            filename: './logs/springtime.log',
+        new transports.File({
+            level: 'error',
+            filename: './logs/error.log',
             maxsize: '5,242,880'
-        })
+        }),
+        new transports.File({
+            filename: './logs/spring.log',
+            maxsize: '5,242,880'
+        }),
 	]
 });
 

@@ -1,8 +1,12 @@
-const MainClient = require("./main/bot.js");
-const client = new MainClient();
+// require("dotenv").config();
+// const logger = require('./plugins/logger')
+// const { ShardingManager } = require('discord.js');
 
-client.connect()
-client.on("error", (err) => {
-  console.log(err);
- });
-module.exports = client; 
+// const manager = new ShardingManager('./src/main/login.js', { totalShards: 3,
+//      token: process.env.TOKEN });
+
+// manager.on('shardCreate', shard => logger.info(`Launched shard ${shard.id}`));
+
+// manager.spawn({timeout: Infinity});
+
+require('./main/login')

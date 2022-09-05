@@ -27,7 +27,7 @@ module.exports = async(client, interaction) => {
             return;
         }
 
-        logger.info(`[COMMAND] ${command.name} used by ${interaction.user.tag} from ${interaction.guild.name} (${interaction.guild.id})`);
+        logger.info(`[COMMAND] ${command.options[0].name} used by ${interaction.user.tag} from ${interaction.guild.name} (${interaction.guild.id})`);
 
         if(!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.SendMessages)) return interaction.user.dmChannel.send(`${client.i18n.get(language, "interaction", "no_perms")}`);
         if(!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ViewChannel)) return;

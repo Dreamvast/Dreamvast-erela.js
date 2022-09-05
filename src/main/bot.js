@@ -1,16 +1,17 @@
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const { Manager } = require("erela.js");
 const Discord = require('discord.js');
-const Spotify = require("erela.js-spotify")
+const Spotify = require("../plugins/Spotify")
 const Deezer = require("../plugins/Deezer");
 const AppleMusic = require("erela.js-apple")
 const Facebook = require("erela.js-facebook");
-const { I18n } = require("locale-parser")
+const { I18n } = require("@hammerhq/localization")
+const Cluster = require('discord-hybrid-sharding');
+const TIDAL  = require("erela.js-tidal");
 
 class MainClient extends Client {
      constructor() {
         super({
-          shards: 'auto',
             allowedMentions: {
                 parse: ["roles", "users", "everyone"],
                 repliedUser: false
@@ -45,7 +46,8 @@ class MainClient extends Client {
         }),
         new Facebook(),
         new Deezer(),
-        new AppleMusic()
+        new AppleMusic(),
+        new TIDAL(),
       ],
       send(id, payload) {
         const guild = client.guilds.cache.get(id);
