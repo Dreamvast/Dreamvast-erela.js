@@ -62,3 +62,5 @@ dis_desc: "*Tôi đã bị mất kết nối tại <#%{voice}>*"
 # On player get move! = (detroy player)
 leave_title: "Di chuyển"
 leave_desc: "*Tôi đã bị di chuyển, đã tự động ngắt kết nối*"
+player_end: "Ngắt kết nối kênh đàm thoại <#%{leave}> vì bạn để tôi có một mình à ;<"
+download_title: "Tải xuống:"
