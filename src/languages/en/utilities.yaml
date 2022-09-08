@@ -2,8 +2,8 @@
 lang_perm: "You need the `MANAGE_GUILD` permission to use this command."
 lang_arg: "Please specify a language!"
 provide_lang: "Please provide languages: `%{languages}`"
-lang_set: "`🔧` | **Language has been set to:** `%{language}` *This is an error command so it cannot be changed after you type it*"
-lang_change: "`🔧` | **Language has been change to:** `%{language}` *This is an error command so it cannot be changed after you type it*"
+lang_set: "`🔧` | **Language has been set to:** `%{language}`"
+lang_change: "`🔧` | **Language has been change to:** `%{language}`"
 lang_error: "Something went wrong please try again later."
 
 ##### Restart command #####
