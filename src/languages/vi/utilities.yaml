@@ -1,7 +1,7 @@
 ##### Language command #####
 lang_perm: "Bạn cần quyền `MANAGE_GUILD` để sử dụng lệnh này."
 lang_arg: "Vui lòng chỉ định một ngôn ngữ!"
-provide_lang: "Vui lòng cung cấp ngôn ngữ: `%{languages}`"
+provide_lang: "**Vui lòng cung cấp ngôn ngữ:** \n`%{languages}`"
 lang_set: "`🔧` | **Ngôn ngữ đã được đặt thành:** `%{language}`"
 lang_change: "`🔧` | **Ngôn ngữ đã được thay đổi thành:** `%{language}`"
 lang_error: "Đã xảy ra sự cố, vui lòng thử lại sau."
