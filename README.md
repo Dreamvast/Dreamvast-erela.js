@@ -2,8 +2,6 @@
 
 ## 📑 Short Feature
 - [x] Music System
-- [x] Playlists System
-- [x] Premium System
 - [x] Multi Language
 - [x] SlashCommand
 - [x] ContextMenus

@@ -524,7 +524,7 @@ module.exports = {
                     { name: `${client.i18n.get(language, "music", "np_author")}`, value: `${song.author}`, inline: true },
                     { name: `${client.i18n.get(language, "music", "np_request")}`, value: `${song.requester}`, inline: true },
                     { name: `${client.i18n.get(language, "music", "np_volume")}`, value: `${player.volume}%`, inline: true },
-                    { name: `${client.i18n.get(language, "music", "np_download")}`, value: `**[Click Here](https://www.mp3fromlink.com/watch?v=${song.identifier})**`, inline: true },
+                    { name: `${client.i18n.get(language, "music", "np_download")}`, value: `**[Click Here](https://www.y2mate.com/youtube/${song.identifier})**`, inline: true },
                     { name: `${client.i18n.get(language, "music", "np_current_duration", {
                         current_duration: CurrentDuration,
                         total_duration: TotalDuration
