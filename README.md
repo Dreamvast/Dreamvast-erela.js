@@ -301,11 +301,14 @@ Example Output:
 ### **4. Install Dreamvast using Docker 🐋:**
 ---------------------------------------------
 **1. Make sure you config the .env file or the config.js file in ./src/plugins/config.js**
+
 **2. Change to the Discord bot project directory.**
+
 **3. Build the docker container for the Discord bot.**
 ```
 docker build -t dreamvast .
 ```
+
 **4. Run the docker container.**
 ```
 docker run -d dreamvast
