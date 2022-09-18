@@ -320,12 +320,16 @@ docker run -d dreamvast
 ```
 docker build -t [name] .
 ```
+
 *The `-t` option is the tag name option.*
+
 **2. To run the docker container, using the following command: (Please remove the [] when you type the name)**
 ```
 docker run -d [name]
 ```
+
 *The `-d` option is runs the container in detached mode (it runs in the background).*
+
 **3. To list all docker processes and container id, using the following command:**
 ```
 docker ps
