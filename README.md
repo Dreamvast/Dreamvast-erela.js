@@ -297,7 +297,7 @@ Example Output:
 ```
 ##### Guide source: https://viblo.asia/p/how-to-install-docker-on-ubuntu-RnB5pmJ7KPG
 
----------------------------------------------
+
 ### **4. Install Dreamvast using Docker 🐋:**
 ---------------------------------------------
 **1. Make sure you config the .env file or the config.js file in ./src/plugins/config.js**
