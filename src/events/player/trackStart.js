@@ -13,78 +13,79 @@ module.exports = async (client, player, track, payload) => {
     });
   }
 
-  if (Control.playerControl === 'enable'){
-    if(!player) return;
+  if(!player) return;
 
-    /////////// Update Music Setup ///////////
+  /////////// Update Music Setup ///////////
 
-    await client.UpdateQueueMsg(player);
+  await client.UpdateQueueMsg(player);
 
-    /////////// Update Music Setup ///////////
+  /////////// Update Music Setup ///////////
 
-    const channel = client.channels.cache.get(player.textChannel);
-    if (!channel) return;
+  const channel = client.channels.cache.get(player.textChannel);
+  if (!channel) return;
 
-    let data = await Setup.findOne({ guild: channel.guild.id });
-    if (player.textChannel === data.channel) return;
+  let data = await Setup.findOne({ guild: channel.guild.id });
+  if (player.textChannel === data.channel) return;
 
-		let guildModel = await GLang.findOne({
+  if (Control.playerControl === 'disable') return
+
+	let guildModel = await GLang.findOne({
+		guild: channel.guild.id,
+	});
+	if (!guildModel) {
+		guildModel = await GLang.create({
 			guild: channel.guild.id,
+			language: "en",
 		});
-		if (!guildModel) {
-			guildModel = await GLang.create({
-				guild: channel.guild.id,
-				language: "en",
-			});
-		}
-		const { language } = guildModel;
+	}
+	const { language } = guildModel;
   
-    const embeded = new EmbedBuilder()
-      .setAuthor({ name: `${client.i18n.get(language, "player", "track_title")}`, iconURL: `${client.i18n.get(language, "player", "track_icon")}` })
-      .setDescription(`**[${track.title}](${track.uri})**`)
-      .setColor(client.color)
-      .setThumbnail(`https://img.youtube.com/vi/${track.identifier}/hqdefault.jpg`)
-      .addFields([
-        { name: `${client.i18n.get(language, "player", "author_title")}`, value: `${track.author}`, inline: true },
-        { name: `${client.i18n.get(language, "player", "request_title")}`, value: `${track.requester}`, inline: true },
-        { name: `${client.i18n.get(language, "player", "volume_title")}`, value: `${player.volume}%`, inline: true },
-        { name: `${client.i18n.get(language, "player", "queue_title")}`, value: `${player.queue.length}`, inline: true },
-        { name: `${client.i18n.get(language, "player", "duration_title")}`, value: `${formatduration(track.duration, true)}`, inline: true },
-        { name: `${client.i18n.get(language, "player", "total_duration_title")}`, value: `${formatduration(player.queue.duration)}`, inline: true },
-        { name: `${client.i18n.get(language, "player", "download_title")}`, value: `**[${track.title} - y2mate.com](https://www.y2mate.com/youtube/${track.identifier})**`, inline: false },
-        { name: `${client.i18n.get(language, "player", "current_duration_title", {
-          current_duration: formatduration(track.duration, true),
-        })}`, value: `\`\`\`🔴 | 🎶──────────────────────────────\`\`\``, inline: false },
-      ])
-      .setTimestamp();
-    
-    const row = new ActionRowBuilder()
-    .addComponents([
-      new ButtonBuilder()
-      .setCustomId("pause")
-      .setEmoji("⏯")
-      .setStyle("Success"),
-
-      new ButtonBuilder()
-        .setCustomId("replay")
-        .setEmoji("⬅")
-        .setStyle("Primary"),
-      
-      new ButtonBuilder()
-        .setCustomId("stop")
-        .setEmoji("✖")
-        .setStyle("Danger"),
-
-      new ButtonBuilder()
-        .setCustomId("skip")
-        .setEmoji("➡")
-        .setStyle("Primary"),
-
-      new ButtonBuilder()
-        .setCustomId("loop")
-        .setEmoji("🔄")
-        .setStyle("Success")
+  const embeded = new EmbedBuilder()
+    .setAuthor({ name: `${client.i18n.get(language, "player", "track_title")}`, iconURL: `${client.i18n.get(language, "player", "track_icon")}` })
+    .setDescription(`**[${track.title}](${track.uri})**`)
+    .setColor(client.color)
+    .setThumbnail(`https://img.youtube.com/vi/${track.identifier}/hqdefault.jpg`)
+    .addFields([
+      { name: `${client.i18n.get(language, "player", "author_title")}`, value: `${track.author}`, inline: true },
+      { name: `${client.i18n.get(language, "player", "request_title")}`, value: `${track.requester}`, inline: true },
+      { name: `${client.i18n.get(language, "player", "volume_title")}`, value: `${player.volume}%`, inline: true },
+      { name: `${client.i18n.get(language, "player", "queue_title")}`, value: `${player.queue.length}`, inline: true },
+      { name: `${client.i18n.get(language, "player", "duration_title")}`, value: `${formatduration(track.duration, true)}`, inline: true },
+      { name: `${client.i18n.get(language, "player", "total_duration_title")}`, value: `${formatduration(player.queue.duration)}`, inline: true },
+      { name: `${client.i18n.get(language, "player", "download_title")}`, value: `**[${track.title} - y2mate.com](https://www.y2mate.com/youtube/${track.identifier})**`, inline: false },
+      { name: `${client.i18n.get(language, "player", "current_duration_title", {
+        current_duration: formatduration(track.duration, true),
+      })}`, value: `\`\`\`🔴 | 🎶──────────────────────────────\`\`\``, inline: false },
     ])
+    .setTimestamp();
+  
+  const row = new ActionRowBuilder()
+  .addComponents([
+    new ButtonBuilder()
+    .setCustomId("pause")
+    .setEmoji("⏯")
+    .setStyle("Success"),
+
+    new ButtonBuilder()
+      .setCustomId("replay")
+      .setEmoji("⬅")
+      .setStyle("Primary"),
+    
+    new ButtonBuilder()
+      .setCustomId("stop")
+      .setEmoji("✖")
+      .setStyle("Danger"),
+
+    new ButtonBuilder()
+      .setCustomId("skip")
+      .setEmoji("➡")
+      .setStyle("Primary"),
+
+    new ButtonBuilder()
+      .setCustomId("loop")
+      .setEmoji("🔄")
+      .setStyle("Success")
+  ])
     
     const row2 = new ActionRowBuilder()
       .addComponents([
@@ -296,7 +297,4 @@ module.exports = async (client, player, track, payload) => {
         nplaying.edit({ embeds: [embeded], components: [] })
       }
     });
-  } else if(Control.playerControl === 'disable'){
-    null
-  }
 }

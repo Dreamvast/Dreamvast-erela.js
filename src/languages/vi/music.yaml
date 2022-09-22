@@ -183,3 +183,7 @@ radio_speak: "Tôi không có quyền trong kênh thoại của bạn."
 radio_loading: "Đang xủ lý vui lòng đợi..."
 radio_track: "**Đã thêm vào hàng đợi • [%{title}](%{url})** `%{duration}` • %{request}"
 radio_match: "Đài này đã bị lỗi, lỗi liên kết hoặc bị hỏng. Vui lòng báo lỗi này cho XeonDex </> # 0017 để khắc phục!"
+
+### Stop command!
+stop_loading: "Đang xử lý, vui lòng đợi"
+stop_msg: "`⏯` | **Đã dừng và xóa hàng đợi.**"

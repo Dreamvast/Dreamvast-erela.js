@@ -183,3 +183,7 @@ radio_speak: "I don't have permission to speak in your voice channel."
 radio_loading: "Loading please wait..."
 radio_track: "**Queued • [%{title}](%{url})** `%{duration}` • %{request}"
 radio_match: "This radio has been down, link error or broken. Please report this error to XeonDex </>#0017 to fix!"
+
+### Stop command!
+stop_loading: "Loading please wait..."
+stop_msg: "`⏯` | **Stopped and clear the queue.**"
