@@ -151,6 +151,7 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - 247 (/247)
 - Previous (/previous)
 - Autoplay (/autoplay)
+- File play (/file-play [song file])
 
 ⏺ **Filter Commands!**
 - Bass (/filter bass)
