@@ -87,6 +87,7 @@ pause_msg: "`⏯` | **Bài hát đã:** `%{pause}`"
 
 ### Play command!
 play_loading: "Đang xủ lý vui lòng đợi..."
+play_search: "🔍 **Đang tìm...** `%{result}`"
 play_invoice: "Đang xủ lý vui lòng Bạn cần ở trong một kênh thoại để sử dụng lệnh này.."
 play_join: "Tôi không có quyền tham gia kênh thoại của bạn."
 play_speak: "Tôi không có quyền trong kênh thoại của bạn."

@@ -2,15 +2,16 @@ const { PermissionsBitField, InteractionType, CommandInteraction } = require("di
 const GLang = require("../../plugins/schemas/language.js");
 const chalk = require('chalk');
 const logger = require('../../plugins/logger.js')
+const YouTube = require("youtube-sr").default;
+const { DEFAULT } = require("../../plugins/config.js")
 
  /**
   * @param {CommandInteraction} interaction
   */
 
 module.exports = async(client, interaction) => {
-    if (interaction.type === InteractionType.ApplicationCommand) {
-        if (!client.slash.has(interaction.commandName)) return;
-        if (!interaction.guild) return;
+    if (interaction.isCommand || interaction.isContextMenuCommand || interaction.isModalSubmit || interaction.isChatInputCommand) {
+        if (!interaction.guild || interaction.user.bot) return;
 
         let LANGUAGE = client.i18n;
 
@@ -19,7 +20,34 @@ module.exports = async(client, interaction) => {
 
         const language = LANGUAGE;
 
-        const command = client.slash.get(interaction.commandName);
+        let subCommandName = "";
+        try {
+            subCommandName = interaction.options.getSubcommand();
+        } catch { };
+        let subCommandGroupName = "";
+        try {
+            subCommandGroupName = interaction.options.getSubcommandGroup();
+        } catch { };
+
+        if (interaction.type == InteractionType.ApplicationCommandAutocomplete) {
+            if (interaction.commandName == "play") {
+                const Random = DEFAULT[Math.floor(Math.random() * DEFAULT.length)];
+                let choice = []
+                await YouTube.search(interaction.options.getString("search") || Random, { safeSearch: true, limit: 10 }).then(result => {
+                    result.forEach(x => { choice.push({ name: x.title, value: x.url }) })
+                });
+                await interaction.respond(choice).catch(() => { });
+            }
+        }
+
+        const command = client.slash.find(command => {
+            switch (command.name.length) {
+            case 1: return command.name[0] == interaction.commandName;
+            case 2: return command.name[0] == interaction.commandName && command.name[1] == subCommandName;
+            case 3: return command.name[0] == interaction.commandName && command.name[1] == subCommandGroupName && command.name[2] == subCommandName;
+            case 4: return command.name == interaction.commandName
+            }
+        });
 
         if(!command) return;
         if (!client.dev.includes(interaction.user.id) && client.dev.length > 0) { 
@@ -37,12 +65,14 @@ module.exports = async(client, interaction) => {
         if(!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.Connect)) return interaction.reply(`${client.i18n.get(language, "interaction", "no_perms")}`);
         if(!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageMessages)) return interaction.reply(`${client.i18n.get(language, "interaction", "no_perms")}`);
         if(!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageChannels)) return await interaction.reply(`${client.i18n.get(language, "interaction", "no_perms")}`);
-        
+
+    if (!command) return;
+    if (command) {
         try {
             command.run(interaction, client, language);
         } catch (error) {
-            console.log(error)
+            console.log(error);
             await interaction.reply({ content: `${client.i18n.get(language, "interaction", "error")}`, ephmeral: true });
-        }
+        }}
     }
 }
