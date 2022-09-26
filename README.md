@@ -8,6 +8,7 @@
 - [x] Custom Filters
 - [x] Play music from file
 - [x] Easy to use
+- [x] Autocomplete (Play command)
 
 ## 🎶 Support Source
 - [x] Youtube
