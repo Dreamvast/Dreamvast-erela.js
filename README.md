@@ -182,9 +182,17 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Television (/filter Television)
 	
 📑 **Utilities Commands!**
-- Restart (/utilitie restart) // (OWNER ONLY)
-- Language (/utilitie language input: [language] ) // Example: en, th
-- Control (/utilitie control input: [enable or disable (default: disable)])
+- Restart (/restart) // (OWNER ONLY)
+- Language (/language input: [language] ) // Example: en, th
+- Control (/control input: [enable or disable (default: disable)])
+- Setup (/setup type: [Create/Delete] )
+
+📄 **Info Commands!**
+- Developer (/developer)
+- Invite (/invite)
+- Ping (/ping)
+- Status (/status)
+
 
 </p>
 </details>
