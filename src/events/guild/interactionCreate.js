@@ -20,34 +20,18 @@ module.exports = async(client, interaction) => {
 
         const language = LANGUAGE;
 
-        let subCommandName = "";
-        try {
-            subCommandName = interaction.options.getSubcommand();
-        } catch { };
-        let subCommandGroupName = "";
-        try {
-            subCommandGroupName = interaction.options.getSubcommandGroup();
-        } catch { };
-
         if (interaction.type == InteractionType.ApplicationCommandAutocomplete) {
             if (interaction.commandName == "play") {
                 const Random = DEFAULT[Math.floor(Math.random() * DEFAULT.length)];
                 let choice = []
-                await YouTube.search(interaction.options.getString("search") || Random, { safeSearch: true, limit: 10 }).then(result => {
-                    result.forEach(x => { choice.push({ name: x.title, value: x.url }) })
+                await YouTube.search(interaction.options.get("search").value || Random, { safeSearch: true, limit: 15 }).then(result => {
+                    result.forEach((x, i) => { choice.push({ name: `${++i}. ${x.title}`, value: x.url }) })
                 });
                 await interaction.respond(choice).catch(() => { });
             }
         }
 
-        const command = client.slash.find(command => {
-            switch (command.name.length) {
-            case 1: return command.name[0] == interaction.commandName;
-            case 2: return command.name[0] == interaction.commandName && command.name[1] == subCommandName;
-            case 3: return command.name[0] == interaction.commandName && command.name[1] == subCommandGroupName && command.name[2] == subCommandName;
-            case 4: return command.name == interaction.commandName
-            }
-        });
+        const command = client.slash.get(interaction.commandName);
 
         if(!command) return;
         if (!client.dev.includes(interaction.user.id) && client.dev.length > 0) { 

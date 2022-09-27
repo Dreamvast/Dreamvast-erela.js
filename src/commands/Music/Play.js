@@ -20,7 +20,9 @@ module.exports = {
             if (interaction.options.getString("search")) {
                 await interaction.deferReply({ ephemeral: false });
                 const value = interaction.options.get("search").value;
-                const msg = await interaction.editReply(`${client.i18n.get(language, "music", "play_loading")}`);
+                const msg = await interaction.editReply(`${client.i18n.get(language, "music", "play_loading", {
+                    result: interaction.options.get("search").value
+                })}`);
                 
                 const { channel } = interaction.member.voice;
                 if (!channel) return msg.edit(`${client.i18n.get(language, "music", "play_invoice")}`);

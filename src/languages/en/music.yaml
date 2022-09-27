@@ -86,8 +86,7 @@ pause_switch_resume: "Resumed"
 pause_msg: "`⏯` | **Song has been:** `%{pause}`"
 
 ### Play command!
-play_loading: "Loading please wait..."
-play_search: "🔍 **Searching...** `%{result}`"
+play_loading: "🔍 **Searching...** `%{result}`"
 play_invoice: "You need to be in a voice channel to use command."
 play_join: "I don't have permission to join your voice channel."
 play_speak: "I don't have permission to speak in your voice channel."
