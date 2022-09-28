@@ -24,8 +24,8 @@ module.exports = async(client, interaction) => {
             if (interaction.commandName == "play") {
                 const Random = DEFAULT[Math.floor(Math.random() * DEFAULT.length)];
                 let choice = []
-                await YouTube.search(interaction.options.get("search").value || Random, { safeSearch: true, limit: 15 }).then(result => {
-                    result.forEach((x, i) => { choice.push({ name: `${++i}. ${x.title}`, value: x.url }) })
+                await YouTube.search(interaction.options.get("search").value || Random, { safeSearch: true, limit: 10 }).then(result => {
+                    result.forEach((x) => { choice.push({ name: x.title, value: x.url }) })
                 });
                 await interaction.respond(choice).catch(() => { });
             }
