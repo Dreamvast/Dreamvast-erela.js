@@ -1,13 +1,9 @@
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
-const { Manager } = require("erela.js");
+const { Kazagumo } = require("kazagumo");
 const Discord = require('discord.js');
-const Spotify = require("../plugins/Spotify")
-const Deezer = require("../plugins/Deezer");
-const AppleMusic = require("erela.js-apple")
-const Facebook = require("erela.js-facebook");
 const { I18n } = require("@hammerhq/localization")
 const Cluster = require('discord-hybrid-sharding');
-const TIDAL  = require("erela.js-tidal");
+const { Connectors } = require("shoukaku");
 
 class MainClient extends Client {
      constructor() {
@@ -36,27 +32,16 @@ class MainClient extends Client {
 
 	const client = this;
 
-    this.manager = new Manager({
-      nodes: this.config.NODES,
-      autoPlay: true,
-      plugins: [
-        new Spotify({
-          clientID,
-          clientSecret
-        }),
-        new Facebook(),
-        new Deezer(),
-        new AppleMusic(),
-        new TIDAL(),
-      ],
-      send(id, payload) {
-        const guild = client.guilds.cache.get(id);
-        if (guild) guild.shard.send(payload);
-      },
-    });
+  this.manager = new Kazagumo({
+    defaultSearchEngine: "youtube", 
+    // MAKE SURE YOU HAVE THIS
+    send: (guildId, payload) => {
+      const guild = client.guilds.cache.get(guildId);
+      if (guild) guild.shard.send(payload);
+  }}, new Connectors.DiscordJS(this), this.config.NODES);
 
     ["slash", "premiums"].forEach(x => client[x] = new Collection());
-    ["loadCommand", "loadEvent", "loadDatabase", "loadPlayer" ].forEach(x => require(`../handlers/${x}`)(client));
+    ["loadCommand", "loadEvent", "loadDatabase", "loadPlayer", "loadNodeEvents" ].forEach(x => require(`../handlers/${x}`)(client));
 
 	}
 		connect() {

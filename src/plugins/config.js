@@ -26,9 +26,33 @@ module.exports = {
 
     NODES: [
       { 
-        host: process.env.NODE_HOST || "localhost",
-        port: parseInt(process.env.NODE_PORT || "5555"),
-        password: process.env.NODE_PASSWORD || "123456",
+        name: process.env.NODE_NAME || "Main Lavalink",
+        url: process.env.NODE_URL || "lavalink.oops.wtf:2000",
+        auth: process.env.NODE_PASSWORD || "www.freelavalink.ga",
+        secure: parseBoolean(process.env.NODE_SECURE || 'false')
       } 
     ],
+
+    SHOUKAKU: [
+      {
+        moveOnDisconnect: false,
+        resumable: false,
+        resumableTimeout: 30,
+        reconnectTries: 2,
+        restTimeout: 10000
+      }
+    ]
+}
+
+function parseBoolean(value){
+  if (typeof(value) === 'string'){
+      value = value.trim().toLowerCase();
+  }
+  switch(value){
+      case true:
+      case "true":
+          return true;
+      default:
+          return false;
+  }
 }
