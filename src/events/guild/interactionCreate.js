@@ -4,6 +4,8 @@ const chalk = require('chalk');
 const logger = require('../../plugins/logger.js')
 const YouTube = require("youtube-sr").default;
 const { DEFAULT } = require("../../plugins/config.js")
+var playlistRegExp = /^.*(youtu.be\/|list=)([^#\&\?]*).*/;
+var videoRegEx = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/
 
  /**
   * @param {CommandInteraction} interaction
@@ -21,13 +23,26 @@ module.exports = async(client, interaction) => {
         const language = LANGUAGE;
 
         if (interaction.type == InteractionType.ApplicationCommandAutocomplete) {
+            const url = interaction.options.get("search").value
+            const matchPlaylist = playlistRegExp.test(url);
+            const matchVideo = videoRegEx.test(url)
             if (interaction.commandName == "play") {
-                const Random = DEFAULT[Math.floor(Math.random() * DEFAULT.length)];
-                let choice = []
-                await YouTube.search(interaction.options.get("search").value || Random, { safeSearch: true, limit: 10 }).then(result => {
-                    result.forEach((x) => { choice.push({ name: x.title, value: x.url }) })
-                });
-                await interaction.respond(choice).catch(() => { });
+                if (matchPlaylist === true){
+                    let choice = []
+                    choice.push({ name: url, value: url })
+                    await interaction.respond(choice).catch(() => { });
+                } else if(matchVideo === true) {
+                    let choice = []
+                    choice.push({ name: url, value: url })
+                    await interaction.respond(choice).catch(() => { });
+                } else {
+                    const Random = DEFAULT[Math.floor(Math.random() * DEFAULT.length)];
+                    let choice = []
+                    await YouTube.search(interaction.options.get("search").value || Random, { safeSearch: true, limit: 10 }).then(result => {
+                        result.forEach((x) => { choice.push({ name: x.title, value: x.url }) })
+                    });
+                    await interaction.respond(choice).catch(() => { });
+                }
             }
         }
 
