@@ -27,11 +27,7 @@ module.exports = async(client, interaction) => {
             const matchPlaylist = playlistRegExp.test(url);
             const matchVideo = videoRegEx.test(url)
             if (interaction.commandName == "play") {
-                if (matchPlaylist === true){
-                    let choice = []
-                    choice.push({ name: url, value: url })
-                    await interaction.respond(choice).catch(() => { });
-                } else if(matchVideo === true) {
+                if (matchPlaylist === true || matchVideo === true){
                     let choice = []
                     choice.push({ name: url, value: url })
                     await interaction.respond(choice).catch(() => { });
