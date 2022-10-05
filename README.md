@@ -1,4 +1,12 @@
-[![](https://iili.io/hWrlFp.png)](https://www.dmca.com/Protection/Status.aspx?ID=5467c424-89a9-47ba-8333-191051f752f5&refurl=https://github.com/Dreamvast)
+<p align="center">
+  <img src="https://i.ibb.co/NKgHD4J/rounded-in-photoretrica.png" alt="rounded-in-photoretrica" border="0" width=100>
+  <h3 align="center">
+    Wellcome to Dreamvast!
+  </h3>
+  <h3 align="center">
+    A lightweight and easy-to-use bot
+  </h3>
+</p>
 
 ## 📑 Short Feature
 - [x] Music System
@@ -45,6 +53,7 @@ Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file
 git clone https://github.com/Dreamvast/Dreamvast-slash
 cd Dreamvast-no-intent
 npm install
+node deploySlash.js global
 ```
 
 <details><summary>📄 Configuration [CLICK ME]</summary>
@@ -367,3 +376,5 @@ docker rm [container id]
 ## 🛑 Super Requirements 
 
 Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file)** (i use this version) for LAVALINK!
+
+[![](https://iili.io/hWrlFp.png)](https://www.dmca.com/Protection/Status.aspx?ID=5467c424-89a9-47ba-8333-191051f752f5&refurl=https://github.com/Dreamvast)
