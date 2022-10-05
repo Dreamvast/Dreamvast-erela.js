@@ -22,38 +22,30 @@ module.exports = async(client, interaction) => {
         const language = LANGUAGE;
 
         if (interaction.type == InteractionType.ApplicationCommandAutocomplete) {
-            const url = interaction.options.get("search").value
+          const url = interaction.options.get("search").value
 
-            const match = {
-                youtube: REGEX[0].test(url),
-                spotify: REGEX[1].test(url),
-                deezer: REGEX[2].test(url),
-                soundcloud: REGEX[3].test(url)
-              } 
-    
-						const Random = DEFAULT[Math.floor(Math.random() * DEFAULT.length)];
-    
-            async function checkRegex() {
-              if (
-                match.youtube == true || 
-                match.spotify == true || 
-                match.deezer == true ||
-                match.soundcloud == true
-              ) {
-                let choice = []
-                choice.push({ name: url, value: url })
-                await interaction.respond(choice).catch(() => { });
-              }
-            }
+          const match = REGEX.some(function (match) {
+            return match.test(url) == true;
+          });
+  
+				  const Random = DEFAULT[Math.floor(Math.random() * DEFAULT.length)];
 
-            if (interaction.commandName == "play") {
-							checkRegex()
+          async function checkRegex() {
+            if (match == true) {
               let choice = []
-              await YouTube.search(url || Random, { safeSearch: true, limit: 10 }).then(result => {
-                  result.forEach((x) => { choice.push({ name: x.title, value: x.url }) })
-              });
+              choice.push({ name: url, value: url })
               await interaction.respond(choice).catch(() => { });
             }
+          }
+
+          if (interaction.commandName == "play") {
+					checkRegex()
+            let choice = []
+            await YouTube.search(url || Random, { safeSearch: true, limit: 10 }).then(result => {
+                result.forEach((x) => { choice.push({ name: x.title, value: x.url }) })
+            });
+            await interaction.respond(choice).catch(() => { });
+          }
         }
 
         const command = client.slash.get(interaction.commandName);
