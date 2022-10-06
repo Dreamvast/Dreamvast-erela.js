@@ -21,11 +21,11 @@ const logger = createLogger({
     }),
     new transports.File({
       level: 'error',
-      filename: './logs/error.log',
+      filename: './serverlogs/error.log',
     }),
     new transports.File({
       level: 'info',
-      filename: './logs/info.log',
+      filename: './serverlogs/info.log',
     }),
 	]
 });

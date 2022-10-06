@@ -11,5 +11,9 @@ module.exports = async (client) => {
             }
         });
     })
-    logger.info('SlashCommand Events Loaded!');
+    if (client.slash.size) {
+        logger.info(`Loaded ${client.slash.size} interactions!`)
+    } else {
+        logger.warn(`No interactions loaded, is everything ok?`);
+    }
 }
