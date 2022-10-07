@@ -74,7 +74,7 @@ EMBED_COLOR=#000001
 OWNER_ID=REPLACE_HERE
 
 # Database
-MONGO_URI=mongodb://127.0.0.1:27017/nanospace
+MONGO_URI=mongodb://127.0.0.1:27017/dreamvast
 LIMIT_TRACK=50
 LIMIT_PLAYLIST=10
 
@@ -99,19 +99,14 @@ module.exports = {
 
     OWNER_ID: process.env.OWNER_ID || "YOUR_CLIENT_ID", //your owner discord id example: "515490955801919488"
 
-    NP_REALTIME: process.env.NP_REALTIME || "BOOLEAN", // "true" = realtime, "false" = not realtime :3 // WARNING: on set to "true" = laggy and bot will ratelimit if you have a lot of servers
-    LEAVE_TIMEOUT: parseInt(process.env.LEAVE_TIMEOUT || "120000"), // leave timeout default "120000" = 2 minutes // 1000 = 1 seconds
+    NP_REALTIME: process.env.NP_REALTIME || "BOOLEAN", // "true" = realtime, "false" = not realtime :3 // WARNING: on set to "true" = laggy and bot will ratelimit
 
     LANGUAGE: {
       defaultLocale: process.env.LANGUAGE || "en", // "en" = default language
       directory: resolve("languages"), // <= location of language
     },
 
-    DEV_ID: [], // if you want to use command bot only, you can put your id here example: ["123456789", "123456789"]
-
     MONGO_URI: process.env.MONGO_URI || "YOUR_MONGO_URI", // your mongo uri
-    LIMIT_TRACK: parseInt(process.env.LIMIT_TRACK || "50"),  //<= dafault is "50" // limit track in playlist
-    LIMIT_PLAYLIST: parseInt(process.env.LIMIT_PLAYLIST || "10"), //<= default is "10" // limit can create playlist
 
     NODES: [
       { 
@@ -383,20 +378,16 @@ docker rm [container id]
 # Bot
 TOKEN=REPLACE_HERE
 NP_REALTIME=false
-LEAVE_TIMEOUT=120000
 LANGUAGE=en
 EMBED_COLOR=#000001
 
 # Devloper
 OWNER_ID=REPLACE_HERE
-
-# Database
-MONGO_URI=mongodb://127.0.0.1:27017/dreamvast
 ```
 
 **2. Use this command and you're done!**
 ```
-docker-compose up -d -build
+docker-compose up -d --build
 ```
 
 **All commands are exactly the same as the one above, just change from `docker` to `docker-compose` and change from `[container id]` to `[name]`**

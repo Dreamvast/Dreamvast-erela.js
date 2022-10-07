@@ -1,38 +1,6 @@
 version: "3"
 
 services:
-  dreamvast:
-    build: .
-    image: dreamvast:latest
-    container_name: dreamvast
-    restart: unless-stopped
-    networks:
-      - lavalink-net
-    depends_on:
-      - lavalink
-    environment:
-      # Bot
-      - TOKEN=${TOKEN}
-      - NP_REALTIME=${NP_REALTIME}
-      - LEAVE_TIMEOUT=${LEAVE_TIMEOUT}
-      - LANGUAGE=${LANGUAGE}
-      - EMBED_COLOR=${EMBED_COLOR}
-
-      # Devloper
-      - OWNER_ID=${OWNER_ID}
-
-      # Database
-      - MONGO_URI=${MONGO_URI}
-
-      # Spotify
-      - SPOTIFY_ID=${SPOTIFY_ID}
-      - SPOTIFY_SECRET=${SPOTIFY_SECRET}
-
-      # Lavalink
-      - NODE_HOST=lavalink
-      - NODE_PORT=2333
-      - NODE_PASSWORD=dreamvast
-
   lavalink:
     image: fredboat/lavalink:dev
     container_name: lavalink
@@ -46,6 +14,59 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+  
+  mongodb:
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dreamvast
+      MONGO_INITDB_ROOT_PASSWORD: dreamtest
+    restart: on-failure
+    networks:
+      - mongodb-net
+    volumes:
+      - mongodb_data:/data/db
+    hostname: mongodb
+
+  dreamvast:
+    build: .
+    image: dreamvast:latest
+    container_name: dreamvast
+    restart: unless-stopped
+    networks:
+      - lavalink-net
+      - mongodb-net
+    depends_on:
+      - lavalink
+      - mongodb
+    environment:
+      # Bot
+      - TOKEN=${TOKEN}
+      - NP_REALTIME=${NP_REALTIME}
+      - LEAVE_TIMEOUT=${LEAVE_TIMEOUT}
+      - LANGUAGE=${LANGUAGE}
+      - EMBED_COLOR=${EMBED_COLOR}
+
+      # Devloper
+      - OWNER_ID=${OWNER_ID}
+
+      # Database
+      - MONGO_URI=mongodb://dreamvast:dreamtest@mongodb:27017/streamhatchet?directConnection=true&authSource=admin&replicaSet=replicaset&retryWrites=true
+
+      # Spotify
+      - SPOTIFY_ID=${SPOTIFY_ID}
+      - SPOTIFY_SECRET=${SPOTIFY_SECRET}
+
+      # Lavalink
+      - NODE_HOST=lavalink
+      - NODE_PORT=2333
+      - NODE_PASSWORD=dreamvast
 
 networks:
   lavalink-net:
+  mongodb-net:
+
+volumes:
+  mongodb_data:
