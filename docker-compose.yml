@@ -1,0 +1,51 @@
+version: "3"
+
+services:
+  dreamvast:
+    build: .
+    image: dreamvast:latest
+    container_name: dreamvast
+    restart: unless-stopped
+    networks:
+      - lavalink-net
+    depends_on:
+      - lavalink
+    environment:
+      # Bot
+      - TOKEN=${TOKEN}
+      - NP_REALTIME=${NP_REALTIME}
+      - LEAVE_TIMEOUT=${LEAVE_TIMEOUT}
+      - LANGUAGE=${LANGUAGE}
+      - EMBED_COLOR=${EMBED_COLOR}
+
+      # Devloper
+      - OWNER_ID=${OWNER_ID}
+
+      # Database
+      - MONGO_URI=${MONGO_URI}
+
+      # Spotify
+      - SPOTIFY_ID=${SPOTIFY_ID}
+      - SPOTIFY_SECRET=${SPOTIFY_SECRET}
+
+      # Lavalink
+      - NODE_HOST=lavalink
+      - NODE_PORT=2333
+      - NODE_PASSWORD=dreamvast
+
+  lavalink:
+    image: fredboat/lavalink:dev
+    container_name: lavalink
+    hostname: lavalink
+    restart: unless-stopped
+    networks:
+      - lavalink-net
+    volumes:
+      - ./docker/application.yml:/opt/Lavalink/application.yml:ro
+    healthcheck:
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+networks:
+  lavalink-net:

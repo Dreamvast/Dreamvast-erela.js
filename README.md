@@ -373,6 +373,39 @@ docker rm [container id]
 </p>
 </details>
 
+<details><summary>🐋 Docker all in one hosting command</summary>
+<p>
+
+### Installation
+
+**1. Make sure you config the .env file or the config.js file in ./src/plugins/config.js**
+
+**Example of .env file for docker hosting:**
+
+```
+# Bot
+TOKEN=REPLACE_HERE
+NP_REALTIME=false
+LEAVE_TIMEOUT=120000
+LANGUAGE=en
+EMBED_COLOR=#000001
+
+# Devloper
+OWNER_ID=REPLACE_HERE
+
+# Database
+MONGO_URI=mongodb://127.0.0.1:27017/dreamvast
+```
+
+**2. Use this command and you're done!**
+```
+docker-compose up -d -build
+```
+
+**All commands are exactly the same as the one above, just change from `docker` to `docker-compose` and change from `[container id]` to `[name]`**
+</p>
+</details>
+
 ## 🛑 Super Requirements 
 
 Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file)** (i use this version) for LAVALINK!

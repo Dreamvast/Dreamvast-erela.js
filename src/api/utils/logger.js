@@ -42,19 +42,19 @@ const logger = createLogger({
 
     new transports.File({
       level: 'info',
-      filename: './logs/bot/info.log',
+      filename: './logs/api/info.log',
       format: fileFormat
     }),
 
     new transports.File({
       level: 'error',
-      filename: './logs/bot/error.log',
+      filename: './logs/api/error.log',
       format: fileFormat
     }),
 
     new transports.File({
       level: 'warn',
-      filename: './logs/bot/warn.log',
+      filename: './logs/api/warn.log',
       format: fileFormat
     }),
 	]
