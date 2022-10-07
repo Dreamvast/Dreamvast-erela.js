@@ -1,12 +1,9 @@
-<p align="center">
-  <img src="https://i.ibb.co/NKgHD4J/rounded-in-photoretrica.png" alt="rounded-in-photoretrica" border="0" width=100>
-  <h3 align="center">
-    Wellcome to Dreamvast!
-  </h3>
-  <h3 align="center">
-    A lightweight and easy-to-use bot
-  </h3>
-</p>
+<a href="https://github.com/Dreamvast/Dreamvast"> <img align="right" src="https://i.ibb.co/NKgHD4J/rounded-in-photoretrica.png" width="120"></a>
+
+### Wellcome to Dreamvast!
+
+🌀 | A lightweight and easy-to-use bot
+
 
 ## 📑 Short Feature
 - [x] Music System
