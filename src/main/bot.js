@@ -8,6 +8,7 @@ const Facebook = require("erela.js-facebook");
 const { I18n } = require("@hammerhq/localization")
 const Cluster = require('discord-hybrid-sharding');
 const TIDAL  = require("erela.js-tidal");
+const logger = require("../plugins/logger")
 
 class MainClient extends Client {
      constructor() {
@@ -30,9 +31,16 @@ class MainClient extends Client {
     if(!this.token) this.token = this.config.TOKEN;
     const clientID = this.config.SPOTIFY_ID
     const clientSecret = this.config.SPOTIFY_SECRET
+    this.logger = logger
 
-    process.on('unhandledRejection', error => console.log(error));
-    process.on('uncaughtException', error => console.log(error));
+    process.on('unhandledRejection', error => this.logger.log({
+      level: 'error',
+      message: error
+    }));
+    process.on('uncaughtException', error => this.logger.log({
+      level: 'error',
+      message: error
+    }));
 
 	const client = this;
 

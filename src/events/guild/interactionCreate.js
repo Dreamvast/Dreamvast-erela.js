@@ -1,7 +1,6 @@
 const { PermissionsBitField, InteractionType, CommandInteraction } = require("discord.js");
 const GLang = require("../../plugins/schemas/language.js");
 const chalk = require('chalk');
-const logger = require('../../plugins/logger.js')
 const YouTube = require("youtube-sr").default;
 const { DEFAULT } = require("../../plugins/config.js")
 const { REGEX } = require("../../plugins/regex.js")
@@ -57,7 +56,7 @@ module.exports = async(client, interaction) => {
             return;
         }
 
-        logger.info(`[COMMAND] ${command.name} used by ${interaction.user.tag} from ${interaction.guild.name} (${interaction.guild.id})`);
+        client.logger.info(`[COMMAND] ${command.name} used by ${interaction.user.tag} from ${interaction.guild.name} (${interaction.guild.id})`);
 
         if(!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.SendMessages)) return interaction.user.dmChannel.send(`${client.i18n.get(language, "interaction", "no_perms")}`);
         if(!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ViewChannel)) return;
@@ -72,8 +71,11 @@ module.exports = async(client, interaction) => {
         try {
             command.run(interaction, client, language);
         } catch (error) {
-            console.log(error);
-            await interaction.reply({ content: `${client.i18n.get(language, "interaction", "error")}`, ephmeral: true });
+          client.logger.log({
+            level: 'error',
+            message: error
+          })
+          await interaction.reply({ content: `${client.i18n.get(language, "interaction", "error")}`, ephmeral: true });
         }}
     }
 }

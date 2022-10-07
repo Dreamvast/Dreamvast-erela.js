@@ -1,7 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-const { white, red } = require("chalk");
 const GLang = require("../../plugins/schemas/language.js")
-const logger = require("../../plugins/logger");
 
 module.exports = async (client, player, track, payload) => {
     const channel = client.channels.cache.get(player.textChannel);
@@ -31,7 +29,7 @@ module.exports = async (client, player, track, payload) => {
 
     channel.send({embeds: [embed]});
     
-    console.log(white('[') + red('DEBUG') + white('] ') + red('Track Stuck in ') + white(player.guild) + red(' Auto-Leaved!'));
+    client.logger.info(`Track Stuck in ${player.guild} Auto-Leaved!`);
     if (!player.voiceChannel) player.destroy();
 
 }

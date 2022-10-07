@@ -8,6 +8,9 @@ module.exports = async () => {
             useUnifiedTopology: true,
         });
     } catch (error) {
-        console.log(error);
+        client.logger.log({
+            level: 'error',
+            message: error
+        });
     }
 } 

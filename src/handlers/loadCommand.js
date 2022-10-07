@@ -1,5 +1,4 @@
 const { readdirSync } = require('fs');
-const logger = require("../plugins/logger");
 
 module.exports = async (client) => {
     readdirSync("./src/commands/").map(async dir => {
@@ -12,8 +11,8 @@ module.exports = async (client) => {
         });
     })
     if (client.slash.size) {
-        logger.info(`Loaded ${client.slash.size} interactions!`)
+        client.logger.info(`Loaded ${client.slash.size} interactions!`)
     } else {
-        logger.warn(`No interactions loaded, is everything ok?`);
+        client.logger.warn(`No interactions loaded, is everything ok?`);
     }
 }

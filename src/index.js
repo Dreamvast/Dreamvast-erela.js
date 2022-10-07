@@ -10,4 +10,4 @@
 // manager.spawn({timeout: Infinity});
 
 require('./main/login')
-require('../server/index')
+require('./api/index')
