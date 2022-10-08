@@ -7,6 +7,7 @@
 
 ## 📑 Short Feature
 - [x] Music System
+- [x] Playlist Networks
 - [x] Multi Language
 - [x] SlashCommand
 - [x] ContextMenus
@@ -76,7 +77,7 @@ OWNER_ID=REPLACE_HERE
 # Database
 MONGO_URI=mongodb://127.0.0.1:27017/dreamvast
 LIMIT_TRACK=50
-LIMIT_PLAYLIST=10
+LIMIT_pl=10
 
 # Lavalink
 NODE_HOST=localhost
@@ -193,6 +194,18 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Invite (/invite)
 - Ping (/ping)
 - Status (/status)
+
+📃 **Playlist Commands!**
+- Create (/pl-create [name])
+- Add (/pl-add [name] [link])
+- Private (/pl-private [name])
+- Public (/pl-public [name])
+- Delete (/pl-delete [name])
+- Import (/pl-import [name])
+- Detail (/pl-detail [name])
+- Remove (/pl-remove [name] [position])
+- Savequeue (/pl-savequeue [name])
+- View (/pl-view)
 
 
 </p>
