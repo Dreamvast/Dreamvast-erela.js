@@ -77,7 +77,7 @@ OWNER_ID=REPLACE_HERE
 # Database
 MONGO_URI=mongodb://127.0.0.1:27017/dreamvast
 LIMIT_TRACK=50
-LIMIT_pl=10
+LIMIT_PLAYLIST=10
 
 # Lavalink
 NODE_HOST=localhost
